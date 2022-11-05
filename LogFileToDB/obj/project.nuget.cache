@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "yYSfn5kZ/tXOHimVRyojffuWNDHUVdoFdAMhl2U0g3MlqXPfvzhEVhLN2+hTJKnFq1NtGLo4x8aUOaFKL9o67g==",
+  "dgSpecHash": "3c2Neys9tR1cxzOsN2M+njKMFoYviVYiEgpARVxypjhz7QISojWER9NMwBAPFlugXqMSelyeUDwRALCRLdXLDg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Tobia\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.116\\stub.system.data.sqlite.core.netstandard.1.0.116.nupkg.sha512",
+    "C:\\Users\\Tobia\\.nuget\\packages\\system.data.sqlite.core\\1.0.116\\system.data.sqlite.core.1.0.116.nupkg.sha512"
+  ],
   "logs": []
 }
