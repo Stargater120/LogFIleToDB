@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +23,18 @@ namespace LogFileToDB
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly CommandRepository _repository;
+        public MainWindow(CommandRepository repository)
         {
             InitializeComponent();
+            _repository = repository;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var directory = Directory.GetCurrentDirectory();
+            var path = System.IO.Path.Combine(directory, "LogFile.log");
+            _repository.CreateLogEntrys(path);
         }
     }
 }
