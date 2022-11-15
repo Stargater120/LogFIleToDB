@@ -21,10 +21,14 @@
           "SQLitePCLRaw.core": "2.1.2"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
+          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
+          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection/3.1.30": {
@@ -33,19 +37,27 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.30"
         },
         "compile": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.30": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.2": {
@@ -183,10 +195,14 @@
       "Stub.System.Data.SQLite.Core.NetStandard/1.0.116": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+          "lib/netstandard2.1/System.Data.SQLite.dll": {
+            "related": ".dll.altconfig;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+          "lib/netstandard2.1/System.Data.SQLite.dll": {
+            "related": ".dll.altconfig;.xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/linux-x64/native/SQLite.Interop.dll": {
@@ -481,23 +497,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tobia\\.nuget\\packages\\": {},
+    "C:\\Users\\kayak\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "projectUniqueName": "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
       "projectName": "LogFileToDB",
-      "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
-      "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\obj\\",
+      "projectPath": "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "packagesPath": "C:\\Users\\kayak\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\LogFileToDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kayak\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -506,14 +522,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj"
+            "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\Core\\Core.csproj"
             }
           }
         }
@@ -543,7 +560,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -555,7 +573,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

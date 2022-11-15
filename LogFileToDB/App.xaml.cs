@@ -28,7 +28,7 @@ namespace LogFileToDB
         {
             services.AddSingleton<Repository>();
             services.AddSingleton<CommandRepository>();
-            services.AddSingleton<QuerryRepository>();
+            services.AddSingleton<QueryRepository>();
             services.AddSingleton<MainWindow>();
         }
 
