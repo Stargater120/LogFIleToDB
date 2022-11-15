@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Database.Models;
 using Core.Enums;
 using Core.Models;
 using Microsoft.Data.Sqlite;
 using System.Linq;
 
-namespace Core
+namespace Core { 
     public class QueryRepository : Repository
     {      
        
@@ -111,3 +110,4 @@ namespace Core
         }
     }
 }
+

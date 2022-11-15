@@ -3,8 +3,6 @@ using Database.Models;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core
