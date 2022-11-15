@@ -15,6 +15,9 @@ namespace Core
             return GetEntriesAsync(query);
         }
 
-        public IAsyncEnumerable<LogEntry> GetAllLogEntriesInTimeRangeAsync()
+        public IAsyncEnumerable<LogEntry> GetFilteredLogEntriesAsync()
+        {
+
+        }
     }
 }
