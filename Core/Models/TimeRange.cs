@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Models
 {
-    internal class TimeRange : IValidatableObject
+    public class TimeRange : IValidatableObject
     {
         public DateTime Begin { get; set; }
         public DateTime End { get; set; }

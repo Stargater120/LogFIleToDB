@@ -11,10 +11,12 @@ namespace Core
 {
     public class Repository
     {
-        private readonly DBContext _dBContext;
+        protected readonly DBContext _dBContext;
+        private readonly SQLHelper _sqlHelper;
         public Repository()
         {
            _dBContext = new DBContext();
+           _sqlHelper = new SQLHelper();
         }
 
         protected async Task CreateEntry(string command)
@@ -41,12 +43,12 @@ namespace Core
                     {
                         Id = reader.GetInt32(0),
                         TimeStamp = reader.GetDateTime(1),
-                        Method = reader.GetString(2),
-                        URL = reader.GetString(3),
+                        Method = _sqlHelper.GetStringNullable(reader, 2),
+                        URL = _sqlHelper.GetStringNullable(reader, 3),
                         StatusCode = reader.GetInt32(4),
-                        ResponseTime = reader.GetString(5),
-                        IPAddress = reader.GetString(6),
-                        Protocol = reader.GetString(8)
+                        ResponseTime = _sqlHelper.GetStringNullable(reader, 5),
+                        IPAddress = _sqlHelper.GetStringNullable(reader, 6),
+                        Protocol = _sqlHelper.GetStringNullable(reader, 7)
                     };
                     return entry;
                 }
@@ -54,12 +56,8 @@ namespace Core
             }
         }
 
-        protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(string query)
-        {
-            using var connection = _dBContext.GetOpenDBConnection();
-            using (var cmd = connection.CreateCommand())
-            {
-                cmd.CommandText = query;
+        protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(SqliteCommand cmd)        {
+            
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -69,15 +67,15 @@ namespace Core
                         {
                             Id = reader.GetInt32(0),
                             TimeStamp = reader.GetDateTime(1),
-                            Method = reader.GetString(2),
-                            URL = reader.GetString(3),
+                            Method = _sqlHelper.GetStringNullable(reader, 2),
+                            URL = _sqlHelper.GetStringNullable(reader, 3),
                             StatusCode = reader.GetInt32(4),
-                            ResponseTime = reader.GetString(5),
-                            IPAddress = reader.GetString(6),
-                            Protocol = reader.GetString(8)
+                            ResponseTime = _sqlHelper.GetStringNullable(reader, 5),
+                            IPAddress = _sqlHelper.GetStringNullable(reader, 6),
+                            Protocol = _sqlHelper.GetStringNullable(reader, 7)
                         };
                         yield return entry;
-                    }
+                    
                 }
                 throw new Exception("Kein eintrag gefunden");
             }

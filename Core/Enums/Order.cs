@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Enums
+﻿namespace Core.Enums
 {
-    internal enum Order
+    public enum Order
     {
         None = 0,
         Ascending = 1,

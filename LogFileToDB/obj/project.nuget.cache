@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YIH7LblxKkurL8zgUGRSZEYSZ5TZTDHkbufQ2KKN2pIfuqS8yXn77dXxU7KIHRJgU/mSEW8L/vYKR9lMRWOd2Q==",
+  "dgSpecHash": "rqoAjh74bRyBInBg14m2zmoU+KY2xeZGmM9i2ziqV6srnA67oc36Dz3PeUyEi+9ZwI+tuZMdsUye+xr7GYTZlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kayak\\source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+  "projectFilePath": "C:\\Users\\kayak\\Source\\Repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kayak\\.nuget\\packages\\microsoft.data.sqlite\\7.0.0\\microsoft.data.sqlite.7.0.0.nupkg.sha512",
     "C:\\Users\\kayak\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",

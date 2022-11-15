@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Core.Enums
 {
-    internal enum OrderingProperties
+    public enum OrderingProperties
     {
-        Attribute = 0,
+        Method = 0,
         ResponseTime = 1,
         TimeStamp = 2,
     }

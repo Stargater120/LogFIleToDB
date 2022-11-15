@@ -3,7 +3,7 @@ using Core.Enums;
 
 namespace Core.Models
 {
-    internal class LogEntriesFilter
+    public class LogEntriesFilter
     {
         #nullable enable
         public TimeRange? TimeRange { get; set; }
