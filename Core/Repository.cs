@@ -11,32 +11,28 @@ namespace Core
 {
     public class Repository
     {
-        private readonly SqliteConnection _connection;
-
+        private readonly DBContext _dBContext;
         public Repository()
         {
-            DBContext dBContext = new DBContext();
-            _connection = dBContext.GetDBConnection();
+           _dBContext = new DBContext();
         }
 
         protected async Task CreateEntry(string command)
         {
-            
+            using var connection = _dBContext.GetOpenDBConnection();
 
-            using(var cmd = _connection.CreateCommand())
+            using(var cmd = connection.CreateCommand())
             {
-                _connection.Open();
                 cmd.CommandText = command;
                 await cmd.ExecuteNonQueryAsync();
-                _connection.Close();
             }
         }
 
         protected async Task<LogEntry> GetEntryAsync(string query)
         {
-            using(var cmd = _connection.CreateCommand())
+            using var connection = _dBContext.GetOpenDBConnection();
+            using(var cmd = connection.CreateCommand())
             {
-                _connection.Open();
                 cmd.CommandText = query;
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
@@ -52,27 +48,24 @@ namespace Core
                         IPAddress = reader.GetString(6),
                         Protocol = reader.GetString(8)
                     };
-                    _connection.Close();
                     return entry;
                 }
-                _connection.Close();
                 throw new Exception("Kein eintrag gefunden");
             }
         }
 
-        protected async Task<List<LogEntry>> GetEntriesAsync(string query)
+        protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(string query)
         {
-            using (var cmd = _connection.CreateCommand())
+            using var connection = _dBContext.GetOpenDBConnection();
+            using (var cmd = connection.CreateCommand())
             {
-                var entries = new List<LogEntry>();
-                _connection.Open();
                 cmd.CommandText = query;
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        entries.Add(new LogEntry
+                        LogEntry entry = new LogEntry
                         {
                             Id = reader.GetInt32(0),
                             TimeStamp = reader.GetDateTime(1),
@@ -82,13 +75,10 @@ namespace Core
                             ResponseTime = reader.GetString(5),
                             IPAddress = reader.GetString(6),
                             Protocol = reader.GetString(8)
-                        });
+                        };
+                        yield return entry;
                     }
-                    
-                    _connection.Close();
-                    return entries;
                 }
-                _connection.Close();
                 throw new Exception("Kein eintrag gefunden");
             }
         }

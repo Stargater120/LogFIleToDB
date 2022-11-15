@@ -30,11 +30,11 @@ namespace LogFileToDB
             _repository = repository;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var directory = Directory.GetCurrentDirectory();
             var path = System.IO.Path.Combine(directory, "LogFile.log");
-            _repository.CreateLogEntrys(path);
+            await _repository.CreateLogEntrys(path);
         }
     }
 }
