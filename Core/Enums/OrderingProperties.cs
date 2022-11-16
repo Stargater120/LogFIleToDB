@@ -7,5 +7,6 @@ namespace Core.Enums
         ResponseTime = 1,
         TimeStamp = 2,
         IP = 3,
+        Code = 4,
     }
 }

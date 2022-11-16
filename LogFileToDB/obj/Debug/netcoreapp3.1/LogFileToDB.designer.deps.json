@@ -220,6 +220,14 @@
           "Stub.System.Data.SQLite.Core.NetStandard": "1.0.116"
         }
       },
+      "System.Linq.Async/6.0.1": {
+        "runtime": {
+          "lib/netstandard2.1/System.Linq.Async.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1.35981"
+          }
+        }
+      },
       "System.Memory/4.5.3": {}
     }
   },
@@ -293,6 +301,13 @@
       "sha512": "sha512-djwmo97syWCpUPJbDS0e2qUFUa8cDLeIfMotVkaRkAC5gpfBSZLMzvoLkLp1prY8waAuH1jEC3wcB2ymVVQWtA==",
       "path": "system.data.sqlite.core/1.0.116",
       "hashPath": "system.data.sqlite.core.1.0.116.nupkg.sha512"
+    },
+    "System.Linq.Async/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0YhHcaroWpQ9UCot3Pizah7ryAzQhNvobLMSxeDIGmnXfkQn8u5owvpOH0K6EVB+z9L7u6Cc4W17Br/+jyttEQ==",
+      "path": "system.linq.async/6.0.1",
+      "hashPath": "system.linq.async.6.0.1.nupkg.sha512"
     },
     "System.Memory/4.5.3": {
       "type": "package",

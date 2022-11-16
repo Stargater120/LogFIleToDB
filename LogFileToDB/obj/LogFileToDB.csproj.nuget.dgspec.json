@@ -192,6 +192,10 @@
             "System.Data.SQLite.Core": {
               "target": "Package",
               "version": "[1.0.116, )"
+            },
+            "System.Linq.Async": {
+              "target": "Package",
+              "version": "[6.0.1, )"
             }
           },
           "imports": [

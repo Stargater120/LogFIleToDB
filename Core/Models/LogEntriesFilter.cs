@@ -10,8 +10,8 @@ namespace Core.Models
         public List<string>? IPAdresses { get; set; }
         public List<string>? Methods { get; set; }
         public List<int>? StatusCodes { get; set; }
-        public OrderingProperties OrderBy { get; set; }
-        public Order Order { get; set; }
+        public OrderingProperties? OrderBy { get; set; }
+        public Order? Order { get; set; }
 
     }
 }

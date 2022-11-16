@@ -1,4 +1,7 @@
 ﻿using Core;
+using Core.Models;
+using Database;
+using Database.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +27,12 @@ namespace LogFileToDB
     public partial class MainWindow : Window
     {
         private readonly CommandRepository _repository;
-        public MainWindow(CommandRepository repository)
+        private readonly QueryRepository _queryRepository;
+        public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             InitializeComponent();
             _repository = repository;
+            _queryRepository = queryRepository;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -35,6 +40,6 @@ namespace LogFileToDB
             var directory = Directory.GetCurrentDirectory();
             var path = System.IO.Path.Combine(directory, "LogFile.log");
             await _repository.CreateLogEntrys(path);
-        }
+        }       
     }
 }
