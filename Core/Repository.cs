@@ -56,7 +56,7 @@ namespace Core
                     var entry = new LogEntry
                     {
                         Id = reader.GetInt32(0),
-                        TimeStamp = reader.GetString(1),
+                        TimeStamp = reader.GetDateTime(1),
                         Method = reader.GetString(2),
                         URL = reader.GetString(3),
                         StatusCode = reader.GetInt32(4),
@@ -87,7 +87,7 @@ namespace Core
                         entries.Add(new LogEntry
                         {
                             Id = reader.GetInt32(0),
-                            TimeStamp = reader.GetString(1),
+                            TimeStamp = reader.GetDateTime(1),
                             Method = reader.GetString(2),
                             URL = reader.GetString(3),
                             StatusCode = reader.GetInt32(4),
