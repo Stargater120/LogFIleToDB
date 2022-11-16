@@ -17,15 +17,29 @@ namespace Core
             _sqlHelper = helper;
         }
 
-        protected async Task CreateEntry(string command)
+        protected async Task CreateEntry(List<string> commands)
         {
-            using var connection = _dBContext.GetOpenDBConnection();
-
-            using(var cmd = connection.CreateCommand())
+            int counter = 0;
+            try
             {
-                cmd.CommandText = command;
-                await cmd.ExecuteNonQueryAsync();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    _connection.Open();
+                    foreach (string command in commands)
+                    {
+                        cmd.CommandText = command;
+                        cmd.ExecuteNonQuery();
+                        counter++;
+                    }
+                    _connection.Close();
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         protected async Task<LogEntry> GetEntryAsync(string query)
