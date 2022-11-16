@@ -5,6 +5,7 @@ using Core.Models;
 using Microsoft.Data.Sqlite;
 using System.Linq;
 using Database;
+using System.Threading.Tasks;
 
 namespace Core { 
     public class QueryRepository : Repository
@@ -22,6 +23,15 @@ namespace Core {
 
             return GetEntriesAsync(cmd);
         }
+
+        public async Task<long> GetTotalCount()
+        {
+            string query = "SELECT COUNT(*) FROM log_entry";
+            using var cmd = new SqliteCommand();
+            cmd.CommandText = query;
+            return await GetCountAsync(cmd);
+        }
+
 
         public IAsyncEnumerable<LogEntry> GetFilteredLogEntriesAsync(LogEntriesFilter filter)
         {
@@ -50,6 +60,13 @@ namespace Core {
             cmd.CommandText = query;
             return GetEntriesAsync(cmd);
         }
+
+        private Dictionary<OrderingProperties, string> propertyNames = new Dictionary<OrderingProperties, string>() {
+            {OrderingProperties.IP, "ip_adress" },
+            {OrderingProperties.Method, "method" },
+            {OrderingProperties.ResponseTime, "response_time" },
+            {OrderingProperties.TimeStamp, "time_stamp" },
+        };
 
         private static IEnumerable<string> GetOrderProperty(OrderingProperties property)
         {

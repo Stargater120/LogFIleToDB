@@ -31,7 +31,6 @@ namespace Core
         public async Task CreateLogEntrys(string filePath)
         {
             var file = File.ReadAllText(filePath);
-       // C: \Users\kayak\source\repos\LogFIleToDB\LogFileToDB\bin\Debug\netcoreapp3.1
             string[] seperater = new string[] { "\r", "\n" };
             var lines = file.Split(seperater, StringSplitOptions.RemoveEmptyEntries);
             var logEntrys = new List<LogEntry>();

@@ -33,7 +33,7 @@ namespace LogFileToDB
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var directory = Directory.GetCurrentDirectory();
-            var path = System.IO.Path.Combine(directory, "LogFile.txt");
+            var path = System.IO.Path.Combine(directory, "LogFile.log");
             await _repository.CreateLogEntrys(path);
         }
     }

@@ -6,5 +6,6 @@ namespace Core.Enums
         Method = 0,
         ResponseTime = 1,
         TimeStamp = 2,
+        IP = 3,
     }
 }
