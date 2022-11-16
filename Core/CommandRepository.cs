@@ -22,7 +22,7 @@ namespace Core
             int counter = 0;
             foreach (var logEntry in logEntries)
             {
-                string newValue = $"(\"{logEntry.TimeStamp}\", \"{logEntry.Method}\", \"{logEntry.URL}\", {logEntry.StatusCode}, \"{logEntry.ResponseTime}\", \"{logEntry.IPAddress}\", \"{logEntry.Protocol}\"),";
+                string newValue = $"(\"{logEntry.TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")}\", \"{logEntry.Method}\", \"{logEntry.URL}\", {logEntry.StatusCode}, \"{logEntry.ResponseTime}\", \"{logEntry.IPAddress}\", \"{logEntry.Protocol}\"),";
                 command += newValue;
                 if(counter % 100 == 0 && counter > 1)
                 {
@@ -50,7 +50,7 @@ namespace Core
                 var entry = new LogEntry();
                 entry.IPAddress = logLine.Substring(0, logLine.IndexOf(" - -"));
                 string date = logLine.Substring(logLine.IndexOf("[") + 1, (logLine.IndexOf("]")) - (logLine.IndexOf("[") + 1));
-                entry.TimeStamp = DateTime.Parse(date).ToString("yyyy-MM-dd HH:mm:ss"); //DateTime.Parse(date.Replace("/", "-"));
+                entry.TimeStamp = DateTime.Parse(date); //DateTime.Parse(date.Replace("/", "-"));
                 entry.Method = logLine.Substring(logLine.IndexOf("]") + 3, logLine.IndexOf("/") - (logLine.IndexOf("]") + 4));
                 entry.URL = logLine.Substring(logLine.IndexOf("/"), (logLine.IndexOf("HTTP") - 2) - (logLine.IndexOf("/") - 1));
                 entry.StatusCode = int.Parse(logLine.Substring(logLine.LastIndexOf((char)34) + 2, 3));

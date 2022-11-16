@@ -55,7 +55,7 @@ namespace Core
                 {
                     var entry = new LogEntry
                     {
-                        TimeStamp = _sqlHelper.GetStringNullable(reader, 0),
+                        TimeStamp = reader.GetDateTime(0),
                         Method = _sqlHelper.GetStringNullable(reader, 1),
                         URL = _sqlHelper.GetStringNullable(reader, 2),
                         StatusCode = reader.GetInt32(3),
@@ -102,7 +102,7 @@ namespace Core
                 {
                     LogEntry entry = new LogEntry
                     {
-                        TimeStamp = _sqlHelper.GetStringNullable(reader, 0),
+                        TimeStamp = reader.GetDateTime(0),
                         Method = _sqlHelper.GetStringNullable(reader, 1),
                         URL = _sqlHelper.GetStringNullable(reader, 2),
                         StatusCode = reader.GetInt32(3),
