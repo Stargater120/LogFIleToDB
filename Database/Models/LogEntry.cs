@@ -6,7 +6,6 @@ namespace Database.Models
 {
     public class LogEntry
     {
-        public int Id { get; set; }
         public string IPAddress { get; set; }
         public string TimeStamp { get; set; }
         public string Method { get; set; }

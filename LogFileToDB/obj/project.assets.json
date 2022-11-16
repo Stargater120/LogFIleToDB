@@ -21,10 +21,14 @@
           "SQLitePCLRaw.core": "2.1.2"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
+          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {}
+          "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection/3.1.30": {
@@ -33,19 +37,27 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.30"
         },
         "compile": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.30": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.2": {
@@ -183,10 +195,14 @@
       "Stub.System.Data.SQLite.Core.NetStandard/1.0.116": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+          "lib/netstandard2.1/System.Data.SQLite.dll": {
+            "related": ".dll.altconfig;.xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.1/System.Data.SQLite.dll": {}
+          "lib/netstandard2.1/System.Data.SQLite.dll": {
+            "related": ".dll.altconfig;.xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/linux-x64/native/SQLite.Interop.dll": {
@@ -211,6 +227,19 @@
         "type": "package",
         "dependencies": {
           "Stub.System.Data.SQLite.Core.NetStandard": "[1.0.116]"
+        }
+      },
+      "System.Linq.Async/6.0.1": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/System.Linq.Async.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/System.Linq.Async.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Memory/4.5.3": {
@@ -441,6 +470,34 @@
         "system.data.sqlite.core.nuspec"
       ]
     },
+    "System.Linq.Async/6.0.1": {
+      "sha512": "0YhHcaroWpQ9UCot3Pizah7ryAzQhNvobLMSxeDIGmnXfkQn8u5owvpOH0K6EVB+z9L7u6Cc4W17Br/+jyttEQ==",
+      "type": "package",
+      "path": "system.linq.async/6.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Logo.png",
+        "lib/net48/System.Linq.Async.dll",
+        "lib/net48/System.Linq.Async.xml",
+        "lib/net6.0/System.Linq.Async.dll",
+        "lib/net6.0/System.Linq.Async.xml",
+        "lib/netstandard2.0/System.Linq.Async.dll",
+        "lib/netstandard2.0/System.Linq.Async.xml",
+        "lib/netstandard2.1/System.Linq.Async.dll",
+        "lib/netstandard2.1/System.Linq.Async.xml",
+        "ref/net48/System.Linq.Async.dll",
+        "ref/net48/System.Linq.Async.xml",
+        "ref/net6.0/System.Linq.Async.dll",
+        "ref/net6.0/System.Linq.Async.xml",
+        "ref/netstandard2.0/System.Linq.Async.dll",
+        "ref/netstandard2.0/System.Linq.Async.xml",
+        "ref/netstandard2.1/System.Linq.Async.dll",
+        "ref/netstandard2.1/System.Linq.Async.xml",
+        "system.linq.async.6.0.1.nupkg.sha512",
+        "system.linq.async.nuspec"
+      ]
+    },
     "System.Memory/4.5.3": {
       "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
       "type": "package",
@@ -477,27 +534,28 @@
     ".NETCoreApp,Version=v3.1": [
       "Core >= 1.0.0",
       "Microsoft.Extensions.DependencyInjection >= 3.1.30",
-      "System.Data.SQLite.Core >= 1.0.116"
+      "System.Data.SQLite.Core >= 1.0.116",
+      "System.Linq.Async >= 6.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tobia\\.nuget\\packages\\": {},
+    "C:\\Users\\kayak\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "projectUniqueName": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
       "projectName": "LogFileToDB",
-      "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
-      "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\obj\\",
+      "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "packagesPath": "C:\\Users\\kayak\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kayak\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -506,14 +564,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj"
+            "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj"
             }
           }
         }
@@ -535,6 +594,10 @@
           "System.Data.SQLite.Core": {
             "target": "Package",
             "version": "[1.0.116, )"
+          },
+          "System.Linq.Async": {
+            "target": "Package",
+            "version": "[6.0.1, )"
           }
         },
         "imports": [
@@ -543,7 +606,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -555,7 +619,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
