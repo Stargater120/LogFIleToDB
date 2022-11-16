@@ -14,6 +14,6 @@ namespace Database
             var connection = new SqliteConnection($"Data Source= {dbPath};");
             connection.Open();
             return connection;
-        }
+        }       
     }
 }

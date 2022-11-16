@@ -11,10 +11,10 @@ namespace Core
     {
         protected readonly DBContext _dBContext;
         private readonly SQLHelper _sqlHelper;
-        public Repository()
+        public Repository(DBContext context, SQLHelper helper)
         {
-           _dBContext = new DBContext();
-           _sqlHelper = new SQLHelper();
+            _dBContext = context;
+            _sqlHelper = helper;
         }
 
         protected async Task CreateEntry(string command)
@@ -34,8 +34,8 @@ namespace Core
             using(var cmd = connection.CreateCommand())
             {
                 cmd.CommandText = query;
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                using var reader = cmd.ExecuteReader();
+                while (reader.HasRows)
                 {
                     var entry = new LogEntry
                     {
@@ -50,16 +50,16 @@ namespace Core
                     };
                     return entry;
                 }
-                throw new Exception("Kein eintrag gefunden");
+                throw new Exception("Kein Eintrag gefunden");
             }
         }
 
-        protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(SqliteCommand cmd)        {
+        protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(SqliteCommand cmd){
             
-                var reader = cmd.ExecuteReader();
+                using var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         LogEntry entry = new LogEntry
                         {
@@ -75,8 +75,16 @@ namespace Core
                         yield return entry;
                     
                 }
-                throw new Exception("Kein eintrag gefunden");
+                throw new Exception("Kein Eintrag gefunden");
             }
         }
+
+        protected async Task<long> GetCountAsync(SqliteCommand cmd)
+        {
+            #nullable enable
+            object? result = cmd.ExecuteScalarAsync();
+            return (long)result;
+        }
+
     }
 }

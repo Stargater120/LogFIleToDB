@@ -1,14 +1,20 @@
-﻿using Database.Models;
+﻿using Database;
+using Database.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Core
 {
     public class CommandRepository : Repository
     {
+        public CommandRepository(DBContext context, SQLHelper helper): base(context, helper)
+        {            
+        }
         public async Task CreateLogEntryCommand(List<LogEntry> logEntries)
         {
             string command = "INSERT INTO log_entry(time_stamp, method, url, status_code, response_time, ip_address, protocol) VALUES";
@@ -25,6 +31,7 @@ namespace Core
         public async Task CreateLogEntrys(string filePath)
         {
             var file = File.ReadAllText(filePath);
+       // C: \Users\kayak\source\repos\LogFIleToDB\LogFileToDB\bin\Debug\netcoreapp3.1
             string[] seperater = new string[] { "\r", "\n" };
             var lines = file.Split(seperater, StringSplitOptions.RemoveEmptyEntries);
             var logEntrys = new List<LogEntry>();

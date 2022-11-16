@@ -4,11 +4,15 @@ using Core.Enums;
 using Core.Models;
 using Microsoft.Data.Sqlite;
 using System.Linq;
+using Database;
 
 namespace Core { 
     public class QueryRepository : Repository
-    {      
-       
+    {
+        public QueryRepository(DBContext context, SQLHelper helper) : base(context, helper)
+        {
+        }
+
         public IAsyncEnumerable<LogEntry> GetAllLogEntriesAsync()
         {
             string query = "SELECT * FROM log_entry";
