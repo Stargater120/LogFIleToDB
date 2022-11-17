@@ -21,8 +21,8 @@ namespace LogFileToDB
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<SQLHelper, SQLHelper>();
-            services.AddSingleton < DBContext, DBContext>();
+            services.AddSingleton<SQLHelper>();
+            services.AddSingleton < DBContext>();
             services.AddSingleton<Repository>();
             services.AddSingleton<CommandRepository>();
             services.AddSingleton<QueryRepository>();
