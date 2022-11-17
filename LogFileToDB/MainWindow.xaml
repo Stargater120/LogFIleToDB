@@ -5,8 +5,421 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogFileToDB"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="700"
+        Width="1000"
+        ResizeMode="NoResize"
+        Topmost="True"
+        
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!--Toggle Button Style Template-->
+        
+    </Window.Resources>
     <Grid>
+        <!--BackGround Color-->
+        <Grid Background="#2d3436">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <!--Navigation Panel-->
+            <StackPanel x:Name="St_Panel" Grid.Column="0">
+                <!--Grid For Menu Buttons-->
+                <Grid Height="60">
+                    <!--Toggle Button-->
 
+                    <ToggleButton x:Name="Tg_Analyse1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/1045/1045802.png" Width="50" Height="35"></Image>
+
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">Protokollliste</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse1" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="230" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse1" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="230" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+
+
+                    </ToggleButton>
+                </Grid>
+                <Grid Height="60">
+                    <!--Toggle Button-->
+                    <ToggleButton x:Name="Tg_Analyse2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/1674/1674968.png" Width="50" Height="35"></Image>
+
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">IP-Adressen</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel2">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse2" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="230" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel2">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse2" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="230" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                </Grid>
+                <Grid Height="60">
+                    <!--Toggle Button-->
+                    <ToggleButton x:Name="Tg_Analyse3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/1183/1183960.png" Width="50" Height="35"></Image>
+
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">Methoden</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel3">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse3" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="230" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel3">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse3" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="230" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                </Grid>
+                <Grid Height="60">
+                    <!--Toggle Button-->
+                    <ToggleButton x:Name="Tg_Analyse4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/183/183902.png" Width="50" Height="35"></Image>
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">Status</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel4">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse4" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="230" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel4">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_Analyse4" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="230" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                </Grid>
+                <Grid Height="60">
+                    <!--Toggle Button-->
+                    <ToggleButton Click="btnOpenFile_Click" x:Name="Tg_OpenFile" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/7604/7604005.png" Width="50" Height="35"></Image>
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">Datei öffnen</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel5">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_OpenFile" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="230" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel5">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_OpenFile" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="230" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                </Grid>
+                <Grid Height="60">
+                    <!--Toggle Button-->
+                    <ToggleButton  x:Name="Tg_LoadedFiles" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Height="45" Width="50" Margin="10,5,0,0" BorderThickness="0">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Content" Value="EDIT"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Content" Value="Done"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="350"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://cdn-icons-png.flaticon.com/512/124/124837.png" Width="50" Height="35"></Image>
+                            <TextBlock Grid.Column="1" TextAlignment="Center" FontSize="25">Geladene Dateien anzeigen</TextBlock>
+                        </Grid>
+                        <!--Toggle Btn event-->
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel6">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_LoadedFiles" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="50" To="400" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowStackPanel6">
+                                        <DoubleAnimation Storyboard.TargetName="Tg_LoadedFiles" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="400" To="50" Duration="0:0:0.2">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                </Grid>
+
+
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
