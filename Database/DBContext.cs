@@ -8,10 +8,12 @@ namespace Database
 {
     public class DBContext
     {
-        public SqliteConnection GetDBConnection()
+        public SqliteConnection GetOpenDBConnection()
         {
             string dbPath = Path.Combine(Directory.GetCurrentDirectory(), "DB.db");
-            return new SqliteConnection($"Data Source= {dbPath};");
-        }
+            var connection = new SqliteConnection($"Data Source= {dbPath};");
+            connection.Open();
+            return connection;
+        }       
     }
 }

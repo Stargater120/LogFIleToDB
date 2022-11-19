@@ -1,4 +1,8 @@
 ﻿using Core;
+using Core.Models;
+using Database;
+using Database.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,17 +28,39 @@ namespace LogFileToDB
     public partial class MainWindow : Window
     {
         private readonly CommandRepository _repository;
-        public MainWindow(CommandRepository repository)
+        private readonly QueryRepository _queryRepository;
+        public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             InitializeComponent();
             _repository = repository;
+            _queryRepository = queryRepository;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void AddDataThroughFile(object sender, RoutedEventArgs e)
         {
-            var directory = Directory.GetCurrentDirectory();
-            var path = System.IO.Path.Combine(directory, "LogFile.log");
-            _repository.CreateLogEntrys(path);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".log";
+            openFileDialog.Filter = "log files (.log) | *.log";
+            openFileDialog.CheckFileExists = true;
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result.HasValue && result.Value == true)
+            {
+                string filePath = openFileDialog.FileName;
+                string fileName = System.IO.Path.GetFileName(filePath);
+                try
+                {
+                    await _repository.CreateLogEntrys(filePath, fileName);
+                    MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen");
+                }
+                catch
+                {
+                    MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen");
+                }
+            }
+           
         }
+        
     }
 }

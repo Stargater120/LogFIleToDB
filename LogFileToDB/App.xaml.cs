@@ -1,11 +1,6 @@
 ﻿using Core;
+using Database;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace LogFileToDB
@@ -26,9 +21,11 @@ namespace LogFileToDB
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<SQLHelper>();
+            services.AddSingleton < DBContext>();
             services.AddSingleton<Repository>();
             services.AddSingleton<CommandRepository>();
-            services.AddSingleton<QuerryRepository>();
+            services.AddSingleton<QueryRepository>();
             services.AddSingleton<MainWindow>();
         }
 
