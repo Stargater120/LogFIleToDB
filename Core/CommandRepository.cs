@@ -47,6 +47,7 @@ namespace Core
             {
                 var entry = new LogEntry();
                 entry.IPAddress = logLine.Substring(0, logLine.IndexOf(" - -"));
+                ValidateIPInput(entry.IPAddress);
                 string date = logLine.Substring(logLine.IndexOf("[") + 1, (logLine.IndexOf("]")) - (logLine.IndexOf("[") + 1));
                 entry.TimeStamp = DateTime.Parse(date); //DateTime.Parse(date.Replace("/", "-"));
                 entry.Method = logLine.Substring(logLine.IndexOf("]") + 3, logLine.IndexOf("/") - (logLine.IndexOf("]") + 4));
@@ -59,11 +60,11 @@ namespace Core
 
             long? fileId = await CreateFileEntryGetIdAsync(fileName, logEntrys.Count);
 
-            if (fileId != null)
-            {
-                await CreateLogEntryCommand(logEntrys, fileId.Value);
-            }
-            else throw new Exception("Daten konnten nicht hinzugefügt werden");
+            //if (fileId != null)
+            //{
+            //    await CreateLogEntryCommand(logEntrys, fileId.Value);
+            //}
+            //else throw new Exception("Daten konnten nicht hinzugefügt werden");
         }
 
         public async Task<long?> CreateFileEntryGetIdAsync(string fileName, int entries)
@@ -75,6 +76,20 @@ namespace Core
             string query = "SELECT last_insert_rowid();";
 
             return await CreateFileEntryAndDeliverId(command, query);
+        }
+
+        private void ValidateIPInput(string ip)
+        {
+            List<string> addressParts = new List<string>();
+            addressParts.AddRange(ip.Split(".", 4));
+            foreach (string addressPart in addressParts)
+            {
+                int number = int.Parse(addressPart);
+                if(number < 0 || number > 255)
+                {
+                    throw new Exception("IP addresse ist nicht in einer validen form");
+                }
+            }
         }
     }
 }
