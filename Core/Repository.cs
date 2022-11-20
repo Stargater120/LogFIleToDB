@@ -44,6 +44,32 @@ namespace Core
             }
         }
 
+        protected async Task<long?> CreateFileEntryAndDeliverId(string command, string query)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+
+            using var transaction = connection.BeginTransaction();
+
+            using var cmd = connection.CreateCommand();
+            cmd.CommandText = command;
+            var rowsAffected = cmd.ExecuteNonQuery();
+
+            using var getIDCmd = connection.CreateCommand();
+            getIDCmd.CommandText = query;
+            var result = await getIDCmd.ExecuteScalarAsync();
+
+            if (result != null)
+            {
+                transaction.Commit();
+            }
+            else
+            {
+                transaction.Rollback();
+            }
+
+            return (long?)result;
+        }
+
         protected async Task<LogEntry> GetEntryAsync(string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
@@ -69,8 +95,7 @@ namespace Core
             }
         }
 
-#nullable enable
-
+        #nullable enable
         protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(LogEntriesFilter? filter, string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
@@ -136,20 +161,20 @@ namespace Core
 
             if (filter != null)
             {
-                query += " HAVING ";
                 var filters = AddFiltersAsync(filter, cmd.Parameters).ToList();
                 if (filters.Any())
                 {
+                    query += " HAVING ";
                     query += string.Join(" AND ", filters);
-                }
-                if (filter.OrderBy != null)
-                {
-                    query += await GetOrderProperty(filter.OrderBy.Value);
-                }
+                }               
                 if (filter.Order != null)
                 {
+                    query += " ORDER BY count ";
                     query += GetOrder(filter.Order.Value);
                 }
+            } else
+            {
+                query += " ORDER BY count ASC ";
             }
 
             cmd.CommandText = query;
@@ -163,6 +188,73 @@ namespace Core
                     AttributeCount = reader.GetInt32(1)
                 };
                 yield return attributeWithCount;
+            }
+        }
+
+        #region values for filter
+        #nullable enable
+        protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query, string? searchValue, int offset)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+            using var cmd = connection.CreateCommand();
+
+            if(!string.IsNullOrEmpty(searchValue))
+            {
+                cmd.Parameters.AddWithValue("searchValue", searchValue);
+            }
+
+            cmd.Parameters.AddWithValue("offset", offset);
+
+            cmd.CommandText = query;
+
+            using var reader = cmd.ExecuteReader();
+
+            while (await reader.ReadAsync())
+            {
+                yield return _sqlHelper.GetStringNullable(reader, 0);
+            }
+        }
+        #nullable disable
+
+        protected async Task<TimeRange> GetLimitsforDateTimePicker(string query)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+            using var cmd = connection.CreateCommand();
+
+            cmd.CommandText = query;
+
+            using var reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
+            {
+                var timeRange = new TimeRange()
+                {
+                    Begin = reader.GetDateTime(0),
+                    End = reader.GetDateTime(1)
+                };
+                return timeRange;
+            }
+            throw new Exception("Keine Einträge gefunden");
+        }
+        #endregion
+
+        protected async IAsyncEnumerable<LogFile> GetAllFilesAsync(string query)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+            using var cmd = connection.CreateCommand();
+
+            cmd.CommandText = query;
+
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                var logFile = new LogFile()
+                {
+                    FileName = _sqlHelper.GetStringNullable(reader, 1),
+                    LoadenOn = reader.GetDateTime(2),
+                    Entries = reader.GetInt32(3),
+                };
+                yield return logFile;
             }
         }
 

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Click="Button_Click" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
+        <Button Click="AddDataThroughFile" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
+
 
     </Grid>
 </Window>
