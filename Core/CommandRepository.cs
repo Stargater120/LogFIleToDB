@@ -60,11 +60,11 @@ namespace Core
 
             long? fileId = await CreateFileEntryGetIdAsync(fileName, logEntrys.Count);
 
-            //if (fileId != null)
-            //{
-            //    await CreateLogEntryCommand(logEntrys, fileId.Value);
-            //}
-            //else throw new Exception("Daten konnten nicht hinzugefügt werden");
+            if (fileId != null)
+            {
+                await CreateLogEntryCommand(logEntrys, fileId.Value);
+            }
+            else throw new Exception("Daten konnten nicht hinzugefügt werden");
         }
 
         public async Task<long?> CreateFileEntryGetIdAsync(string fileName, int entries)
