@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,13 +30,24 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         private readonly QueryRepository _queryRepository;
+        //holds the min and max values of the time_stamp column to use as placeholders in DateTime filters
+        private TimeRange _timeRangeForAnalysis;
+        
         public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             InitializeComponent();
+
+            #region set members
+            GetTimeRange();
             _repository = repository;
             _queryRepository = queryRepository;
-        }
+            #endregion
 
+        }
+        private async void GetTimeRange()
+        {
+            _timeRangeForAnalysis = await _queryRepository.GetTimeRangeForFilterAsync();
+        }
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -58,9 +70,10 @@ namespace LogFileToDB
                 {
                     MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen");
                 }
-            }
-           
+            }           
         }
+
+        
         
     }
 }
