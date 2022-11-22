@@ -10,7 +10,6 @@ namespace Core
 {
     public class QueryRepository : Repository
     {
-        
         private Dictionary<OrderingProperties, string> columnNames = new Dictionary<OrderingProperties, string>() {
             {OrderingProperties.IP, "ip_address" },
             {OrderingProperties.Method, "method" },
@@ -23,7 +22,7 @@ namespace Core
         {
         }
 
-        public IAsyncEnumerable<LogEntry> GetAllLogEntriesAsync()
+        public async Task GetAllLogEntriesAsync()
         {
             string query = @"SELECT
                                 time_stamp, 
@@ -33,7 +32,7 @@ namespace Core
                                 response_time,
                                 ip_address,
                                 protocol 
-                            FROM log_entry";           
+                            FROM log_entry";
 
             return GetEntriesAsync(null, query);
         }

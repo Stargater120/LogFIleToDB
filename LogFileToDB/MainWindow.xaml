@@ -8,7 +8,22 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Click="AddDataThroughFile" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
-
-
+        <Button Click="Button_Click" Content="Fill" HorizontalAlignment="Left" Margin="125,85,0,0" VerticalAlignment="Top"/>
+        <Button Click="Button_Click1" Content="löschen" HorizontalAlignment="Left" Margin="285,85,0,0" VerticalAlignment="Top"/>
+        <ListView Grid.Column="0" x:Name="Tester_Liste" Height="301" VerticalAlignment="Top" Margin="0,133,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP-Adresse" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TimeStamp}" Header="Zeitpunkt" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Method}" Header="Method" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=URL}" Header="URL" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Protocol}" Header="Protocol" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=StatusCode}" Header="Status code" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ResponseTime}" Header="Response Time" Width="90"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        
     </Grid>
 </Window>

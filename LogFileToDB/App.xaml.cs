@@ -27,6 +27,7 @@ namespace LogFileToDB
             services.AddSingleton<CommandRepository>();
             services.AddSingleton<QueryRepository>();
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<DisplayedLists>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
