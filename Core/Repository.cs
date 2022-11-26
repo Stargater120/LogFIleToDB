@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -226,14 +227,21 @@ namespace Core
             using var reader = await cmd.ExecuteReaderAsync();
             if (reader.HasRows)
             {
-                var timeRange = new TimeRange()
+                while (await reader.ReadAsync())
                 {
-                    Begin = reader.GetDateTime(0),
-                    End = reader.GetDateTime(1)
-                };
-                return timeRange;
+                    var timeRange = new TimeRange()
+                    {
+                        Begin = reader.GetDateTime(0),
+                        End = reader.GetDateTime(1)
+                    };
+                    return timeRange;
+                }
             }
-            throw new Exception("Keine Einträge gefunden");
+            return new TimeRange()
+            {
+                Begin = DateTime.Now,
+                End = DateTime.Now
+            };
         }
         #endregion
 

@@ -3,25 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LogFileToDB"
-        xmlns:src="clr-namespace:Core.Models;assembly=Core"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <src:TimeRange x:Key="timeRange"/>
+        <ControlTemplate x:Key="ErrorTemplate">
+
+            <DockPanel LastChildFill="True">
+
+                <Border BorderBrush="Red" BorderThickness="1">
+
+                    <AdornedElementPlaceholder />
+
+                </Border>
+
+            </DockPanel>
+
+        </ControlTemplate>
+
+        <Style TargetType="TextBox">
+
+            <Style.Triggers>
+
+                <Trigger Property="Validation.HasError" Value="true">
+
+                    <Setter Property="ToolTip"
+
+          Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+
+Path=(Validation.Errors)[0].ErrorContent}"/>
+
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
     </Window.Resources>
     <Grid>
         <Button Click="AddDataThroughFile" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="startDate" HorizontalAlignment="Left" Margin="327,251,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="endDate" HorizontalAlignment="Left" Margin="492,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153">
-            <TextBox.Text>
-            <Binding Source="{StaticResource timeRange}" Path="Begin">
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule/>
-                        <local:DatetimepickerValidation></local:DatetimepickerValidation>
-                    </Binding.ValidationRules>
-            </Binding>
-            </TextBox.Text>
+        <TextBox x:Name="startDate" HorizontalAlignment="Left" Margin="327,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{ Binding ValidateBegin, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True }"  Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <TextBox x:Name="endDate" HorizontalAlignment="Left" Margin="492,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Text="{ Binding ValidateEnd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True }"  Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+          
         </TextBox>
     </Grid>
 </Window>

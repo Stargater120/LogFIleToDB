@@ -30,17 +30,18 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         private readonly QueryRepository _queryRepository;
+        private ModelForValidation validationClass;
         //holds the min and max values of the time_stamp column to use as placeholders in DateTime filters
         private TimeRange _timeRangeForAnalysis;
         
         public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             InitializeComponent();
-
             #region set members
-            GetTimeRange();
             _repository = repository;
             _queryRepository = queryRepository;
+            GetTimeRange();
+            DataContext = new ModelForValidation(_timeRangeForAnalysis);
             #endregion
 
         }
