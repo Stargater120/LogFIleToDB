@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Core
 {
     public class CommandRepository : Repository
-    {
+    {       
         public CommandRepository(DBContext context, SQLHelper helper): base(context, helper)
         {            
         }
