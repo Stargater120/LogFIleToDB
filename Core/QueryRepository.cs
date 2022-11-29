@@ -10,6 +10,7 @@ namespace Core
 {
     public class QueryRepository : Repository
     {
+        private readonly DisplayedLists _displayedLists;
         private Dictionary<OrderingProperties, string> columnNames = new Dictionary<OrderingProperties, string>() {
             {OrderingProperties.IP, "ip_address" },
             {OrderingProperties.Method, "method" },
@@ -18,8 +19,9 @@ namespace Core
             {OrderingProperties.Code, "status_code" },
         };
 
-        public QueryRepository(DBContext context, SQLHelper helper) : base(context, helper)
+        public QueryRepository(DBContext context, SQLHelper helper, DisplayedLists displayedLists) : base(context, helper)
         {
+            _displayedLists = displayedLists;
         }
 
         public async Task GetAllLogEntriesAsync()
@@ -34,7 +36,10 @@ namespace Core
                                 protocol 
                             FROM log_entry";
 
-            return GetEntriesAsync(null, query);
+            await foreach (var entrys in GetEntriesAsync(null, query))
+            {
+                _displayedLists.LogEntrys.Add(entrys);
+            }
         }
 
         public async Task<long> GetTotalCountAsync()

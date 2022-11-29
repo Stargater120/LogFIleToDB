@@ -65,22 +65,22 @@ namespace LogFileToDB
            
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            await _queryRepository.GetAllLogEntriesAsync();
-            Tester_Liste.ItemsSource = _displayedLists.LogEntrys;
-        }
+        //private async void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await _queryRepository.GetAllLogEntriesAsync();
+        //    Tester_Liste.ItemsSource = _displayedLists.LogEntrys;
+        //}
 
-        private void Button_Click1(object sender, RoutedEventArgs e)
-        {
-            var templist = _displayedLists.LogEntrys.Skip(15).ToList();
-            //var temp2 = templist.Skip(15).ToList();
-            _displayedLists.Clear("LogEntry");
+        //private void Button_Click1(object sender, RoutedEventArgs e)
+        //{
+        //    var templist = _displayedLists.LogEntrys.Skip(15).ToList();
+        //    //var temp2 = templist.Skip(15).ToList();
+        //    _displayedLists.Clear("LogEntry");
 
-            foreach (var entry in templist)
-            {
-                _displayedLists.LogEntrys.Add(entry);
-            }
-        }
+        //    foreach (var entry in templist)
+        //    {
+        //        _displayedLists.LogEntrys.Add(entry);
+        //    }
+        //}
     }
 }
