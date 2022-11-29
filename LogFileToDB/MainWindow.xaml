@@ -5,23 +5,341 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogFileToDB"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Click="AddDataThroughFile" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
-        <Button Click="Button_Click" Content="Fill" HorizontalAlignment="Left" Margin="125,85,0,0" VerticalAlignment="Top"/>
-        <Button Click="Button_Click1" Content="löschen" HorizontalAlignment="Left" Margin="285,85,0,0" VerticalAlignment="Top"/>
-        <ListView Grid.Column="0" x:Name="Tester_Liste" Height="301" VerticalAlignment="Top" Margin="0,133,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP-Adresse" Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=TimeStamp}" Header="Zeitpunkt" Width="120"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Method}" Header="Method" Width="60"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=URL}" Header="URL" Width="60"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Protocol}" Header="Protocol" Width="60"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=StatusCode}" Header="Status code" Width="80"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ResponseTime}" Header="Response Time" Width="90"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        Title="MainWindow"
+        Height="700"
+        Width="1200"
+        Topmost="True"
+        
+        WindowStartupLocation="CenterScreen">
+    <Grid >
+        <!--Tabs Menu-->
+        <TabControl>
+            <!--ProtokollPage-->
+            <TabItem Header="Protokollliste">
+                <Grid Background="#2d3436">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Date Picker-->
+                    <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+                    <!--ip filter-->
+                    <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+
+                    <!--methode filter-->
+                    <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <!--status filter-->
+                    <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <!--open File Btn-->
+                    <Button Background="White"  Width="100" Height="30" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Top" Margin="10,0,10,0" Grid.Row="1" />
+                    <!--Logs table-->
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="2" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="IP-Adresse"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Datum"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Methode"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="URL"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Status"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Ansprechzeit"
+                      Binding="{Binding }" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <!--IP-Adressen Page-->
+            <TabItem Header="IP-Adressen">
+                <Grid Background="#2d3436">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Date Picker-->
+                    <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+                    <!--IP filter-->
+                    <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="655,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Methode Filter-->
+                    <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="918,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Status Filter-->
+                    <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <!--Logs IP Table--> 
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="IP-Adresse"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Anzahl Requests"
+                      Binding="{Binding }" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <!--Methoden Page-->
+            <TabItem Header="Methoden" >
+                <Grid Background="#2d3436">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Date Picker-->
+                    <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+                    <!--IP Filter-->
+                    <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="655,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Methods Filter-->
+                    <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="918,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Status Filter-->
+                    <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <!--Logs Methods Table-->
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Methoden"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Anzahl Requests"
+                      Binding="{Binding }" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <!--Status Page-->
+            <TabItem Header="Status" >
+                <Grid Background="#2d3436">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--Date Picker-->
+                    <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+                    <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+                    <!--IP Filter-->
+                    <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
+                    <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="655,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Methode Filter-->
+                    <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="918,0,0,0" VerticalAlignment="Center">
+                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
+                    </Button>
+                    <!--Status Filter-->
+                    <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+                        <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
+                        <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+                    </ComboBox>
+                    <!--Logs Methode Table-->
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Status"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Anzahl Requests"
+                      Binding="{Binding }" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <!--Geladene Dateien Page-->
+            <TabItem Header="Geladene Dateien anzeigen">
+                <Grid Background="#2d3436">
+                    <!--Table With uploaded Files-->
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="2" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Dateiname"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Aufgeladen auf"
+                      Binding="{Binding }" Width="*" />
+                            <DataGridTextColumn Header="Menge an Einträgen"
+                      Binding="{Binding }" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
