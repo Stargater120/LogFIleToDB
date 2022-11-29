@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace Core
 {
     public class CommandRepository : Repository
-    {
-        // TimePicker Stackoverflow
-        // https://stackoverflow.com/questions/9218258/is-there-a-timepicker-control-in-wpf-net-4
+    {       
         public CommandRepository(DBContext context, SQLHelper helper): base(context, helper)
         {            
         }
