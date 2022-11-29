@@ -45,9 +45,7 @@
                         <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
                         <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
                     </ComboBox>
-                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="655,0,0,0" VerticalAlignment="Center">
-                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
-                    </Button>
+
                     <!--methode filter-->
                     <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
@@ -62,9 +60,6 @@
                         <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
                         <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
                     </ComboBox>
-                    <Button Width="23" Height="23" HorizontalAlignment="Left" Margin="918,0,0,0" VerticalAlignment="Center">
-                        <Image Source="https://icons.veryicon.com/png/o/internet--web/55-common-web-icons/add-43.png" Width="17" Height="12"></Image>
-                    </Button>
                     <!--status filter-->
                     <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
                     <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
