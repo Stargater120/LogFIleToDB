@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LogFileToDB"
+             xmlns:control="clr-namespace:LogFileToDB"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="1200">
     <Grid>
@@ -15,7 +16,8 @@
         <!--ip filter-->
         <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
         <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="IP_Input" TextChanged="TextBox_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0"/>
+        <!--<TextBox x:Name="IP_Input" TextChanged="TextBox_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0"/>-->
+        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0"/>
 
         <!--methode filter-->
         <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>

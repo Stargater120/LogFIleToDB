@@ -65,10 +65,10 @@ namespace LogFileToDB
            
         }
 
-        private void ListFilterControles_FilterSelected(object sender, EventArgs e)
-        {
-
-        }
+        //private void ListFilterControles_FilterSelected(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var text = e.NewValue as String;
+        //}
 
         //private async void Button_Click(object sender, RoutedEventArgs e)
         //{

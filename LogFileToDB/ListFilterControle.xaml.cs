@@ -24,9 +24,9 @@ namespace LogFileToDB
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            FilterSelected(this, e);
-        }
+        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    FilterSelected(this, e);
+        //}
     }
 }

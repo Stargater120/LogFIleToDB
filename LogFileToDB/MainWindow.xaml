@@ -25,8 +25,8 @@
                         <RowDefinition Height="45"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--Filter Component-->
-                    <controls:ListFilterControles FilterSelected="ListFilterControles_FilterSelected"/>
+                    <!--Filter Component--><!-- FilterSelected="ListFilterControles_FilterSelected"-->
+                    <controls:ListFilterControles />
                     <!--open File Btn-->
                     <Button Background="White"  Width="100" Height="30" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Top" Margin="10,0,10,0" Grid.Row="1" />
                     <!--Logs table-->
