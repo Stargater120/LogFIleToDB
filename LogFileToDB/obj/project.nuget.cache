@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xGY1y/Zj1S0dyd4UdlotRWWyhDO1h/A//FDUzYQA0exV5MTF7G38RyLoNUUWPS4Hy5ejB5bsQynwIYHCTTvuqw==",
+  "dgSpecHash": "6UyQYs/2KXnits3rkBegTeSu21VZw/+YykC/eMTJakNk0qaKFZT3RhYCmPVvPQXdpXoM+XVh7ROJFxAtbbg36Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
+  "projectFilePath": "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tobia\\.nuget\\packages\\microsoft.data.sqlite\\7.0.0\\microsoft.data.sqlite.7.0.0.nupkg.sha512",
     "C:\\Users\\Tobia\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",

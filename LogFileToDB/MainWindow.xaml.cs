@@ -65,6 +65,11 @@ namespace LogFileToDB
            
         }
 
+        private void ListFilterControles_FilterSelected(object sender, EventArgs e)
+        {
+
+        }
+
         //private async void Button_Click(object sender, RoutedEventArgs e)
         //{
         //    await _queryRepository.GetAllLogEntriesAsync();
