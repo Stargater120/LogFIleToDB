@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LogFileToDB"
              mc:Ignorable="d" 
-             d:DesignHeight="25" d:DesignWidth="150">
+             d:DesignHeight="22" d:DesignWidth="150">
     <UserControl.Resources>
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
             <Setter Property="Template">
@@ -32,7 +32,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Height="22">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="10" />
