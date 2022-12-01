@@ -25,7 +25,8 @@
                         <RowDefinition Height="45"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--Filter Component--><!-- FilterSelected="ListFilterControles_FilterSelected"-->
+                    <!--Filter Component-->
+                    <!-- FilterSelected="ListFilterControles_FilterSelected"-->
                     <controls:ListFilterControles />
                     <!--open File Btn-->
                     <Button Background="White"  Width="100" Height="30" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Top" Margin="10,0,10,0" Grid.Row="1" />
@@ -48,8 +49,6 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <!--Filter Component-->
-            <controls:ListFilterControles/>
             <!--IP-Adressen Page-->
             <TabItem Header="IP-Adressen">
                 <Grid Background="#2d3436">
@@ -60,7 +59,8 @@
                         <RowDefinition Height="50"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                   
+                    <!--Filter Component-->
+                    <controls:ListFilterControles/>
                     <!--Logs IP Table--> 
                     <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Columns>

@@ -16,7 +16,7 @@ namespace Core
                 int number = int.Parse(addressPart);
                 if (number < 0 || number > 255)
                 {
-                    throw new Exception("IP addresse ist nicht in einer validen form");
+                    throw new Exception();
                 }
             }
         }

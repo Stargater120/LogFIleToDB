@@ -31,6 +31,7 @@ namespace LogFileToDB
         private readonly CommandRepository _repository;
         private readonly QueryRepository _queryRepository;
         private readonly DisplayedLists _displayedLists;
+        public static LogEntriesFilter entriesFilter = new LogEntriesFilter();
         public MainWindow(CommandRepository repository, QueryRepository queryRepository, DisplayedLists displayedLists)
         {
             InitializeComponent();
