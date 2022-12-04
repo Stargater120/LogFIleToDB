@@ -6,8 +6,8 @@
       "version": "3.1.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\Denis Zaborosciuc\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Denis Zaborosciuc\\.nuget\\packages",
+      "C:\\Users\\kayak\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kayak\\.nuget\\packages",
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
     ],
     "configProperties": {
