@@ -11,13 +11,21 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         private readonly QueryRepository _queryRepository;
-        private readonly DisplayedLists _displayedLists;
+        private DisplayedLists _displayedLists;
         public MainWindow(CommandRepository repository, QueryRepository queryRepository, DisplayedLists displayedLists)
         {
             InitializeComponent();
             _repository = repository;
             _queryRepository = queryRepository;
             _displayedLists = displayedLists;
+            InitializeLists();
+        }
+
+        private async void InitializeLists()
+        {
+            await _queryRepository.GetAllLogEntriesAsync();
+            _displayedLists = _queryRepository._displayedLists;
+            requestsGrid.ItemsSource = _displayedLists.LogEntrys;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
@@ -45,6 +53,7 @@ namespace LogFileToDB
             }
            
         }
+       
 
         //private void ListFilterControles_FilterSelected(object sender, DependencyPropertyChangedEventArgs e)
         //{

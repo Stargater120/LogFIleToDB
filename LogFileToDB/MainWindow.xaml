@@ -79,7 +79,7 @@
                     <!--Filter Component--><!-- FilterSelected="ListFilterControles_FilterSelected"-->
                     <controls:ListFilterControles />
                     <!--open File Btn-->
-                    <Button Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
+                    <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
                        
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -88,7 +88,7 @@
                         </Button.Resources>
                     </Button>
                     <!--Logs table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="2" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" Grid.Row="2" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -96,17 +96,17 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
-                      Binding="{Binding }" Width="185" />
+                      Binding="{Binding Path=IPAddress}" Width="185" />
                             <DataGridTextColumn Header="Datum"
-                      Binding="{Binding }" Width="185" />
+                      Binding="{Binding Path=TimeStamp}" Width="185" />
                             <DataGridTextColumn Header="Methode"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=Method}" Width="*" />
                             <DataGridTextColumn Header="URL"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=URL}" Width="*" />
                             <DataGridTextColumn Header="Status"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=StatusCode}" Width="*" />
                             <DataGridTextColumn Header="Ansprechzeit"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=ResponseTime}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

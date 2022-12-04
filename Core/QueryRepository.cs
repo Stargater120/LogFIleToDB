@@ -4,13 +4,12 @@ using Core.Models;
 using Database;
 using System.Threading.Tasks;
 using Core.Enums;
-using System.Windows.Controls;
 
 namespace Core
 {
     public class QueryRepository : Repository
     {
-        private readonly DisplayedLists _displayedLists;
+        public readonly DisplayedLists _displayedLists;
         private Dictionary<OrderingProperties, string> columnNames = new Dictionary<OrderingProperties, string>() {
             {OrderingProperties.IP, "ip_address" },
             {OrderingProperties.Method, "method" },
