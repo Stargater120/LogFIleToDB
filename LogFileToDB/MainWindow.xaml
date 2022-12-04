@@ -40,7 +40,7 @@ Path=(Validation.Errors)[0].ErrorContent}"/>
     </Window.Resources>
     <Grid>
         <Button Click="AddDataThroughFile" Content="Button" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="startDate" HorizontalAlignment="Left" Margin="327,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{ Binding ValidateBegin, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True }"  Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+        <TextBox x:Name="startDate" PreviewTextInput="validateDateTimeFilterInput" HorizontalAlignment="Left" Margin="327,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="endDate" HorizontalAlignment="Left" Margin="492,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Text="{ Binding ValidateEnd, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True }"  Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
           
         </TextBox>
