@@ -21,10 +21,26 @@ namespace LogFileToDB
     public partial class ListFilterControles : UserControl
     {
         public event EventHandler FilterSelected;
-        private readonly DisplayedLists _displayedLists;
-        public ListFilterControles()
+        private readonly QueryRepository queryRepository;
+        public ListFilterControles(QueryRepository queryRepository)
         {
             InitializeComponent();
+            this.queryRepository = queryRepository;
+        }
+
+        private void FillComboBoxes()
+        {
+
+        }
+
+        private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

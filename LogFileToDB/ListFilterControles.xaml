@@ -21,31 +21,25 @@
 
         <!--methode filter-->
         <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
-            <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <!--status filter-->
         <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
-            <ComboBoxItem IsSelected="true">ComboBox Item #1</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #2</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #4</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #5</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #6</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #7</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #8</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #9</ComboBoxItem>
-            <ComboBoxItem>ComboBox Item #10</ComboBoxItem>
+        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
     </Grid>
 </UserControl>

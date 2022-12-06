@@ -30,12 +30,14 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         private readonly QueryRepository _queryRepository;
+        private readonly DisplayedLists _displayedLists;
         public static LogEntriesFilter entriesFilter = new LogEntriesFilter();
-        public MainWindow(CommandRepository repository, QueryRepository queryRepository)
+        public MainWindow(CommandRepository repository, QueryRepository queryRepository, DisplayedLists displayedLists)
         {
             InitializeComponent();
             _repository = repository;
             _queryRepository = queryRepository;
+            _displayedLists = displayedLists;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
