@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="DateTimeInput.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="IPInput.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ListFilterControles.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DateTimeInput.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="IPInput.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ListFilterControles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

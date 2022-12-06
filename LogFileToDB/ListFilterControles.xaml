@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="LogFileToDB.ListFilterControles"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LogFileToDB"
+             xmlns:control="clr-namespace:LogFileToDB"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="1200">
+    <Grid>
+        <!--Date Picker-->
+        <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
+        <control:DateTimeInput Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+        <control:DateTimeInput Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+        
+        <!--ip filter-->
+        <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Center"/>
+        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="447,0,0,0"/>
+
+        <!--methode filter-->
+        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <!--status filter-->
+        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Width="75" VerticalAlignment="Center" Height="35" Margin="1030" Background="White" Cursor="Hand" Content="Filtern"></Button>
+    </Grid>
+</UserControl>
