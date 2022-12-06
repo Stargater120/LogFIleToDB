@@ -19,12 +19,26 @@
         <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="447,0,0,0"/>
 
         <!--methode filter-->
-        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="600,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox Cursor="Hand"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="660,0,0,0">           
+        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <!--status filter-->
-        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="825,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="889,0,0,0">           
+        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Width="75" VerticalAlignment="Center" Height="35" Margin="1030" Background="White" Cursor="Hand" Content="Filtern"></Button>
     </Grid>
