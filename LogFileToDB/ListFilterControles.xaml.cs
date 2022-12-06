@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +21,7 @@ namespace LogFileToDB
     public partial class ListFilterControles : UserControl
     {
         public event EventHandler FilterSelected;
+        private readonly DisplayedLists _displayedLists;
         public ListFilterControles()
         {
             InitializeComponent();
