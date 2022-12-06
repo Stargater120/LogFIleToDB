@@ -193,17 +193,11 @@ namespace Core
 
         #region values for filter
         #nullable enable
-        protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query, string? searchValue, int offset)
+        protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
 
-            if(!string.IsNullOrEmpty(searchValue))
-            {
-                cmd.Parameters.AddWithValue("searchValue", searchValue);
-            }
-
-            cmd.Parameters.AddWithValue("offset", offset);
 
             cmd.CommandText = query;
 

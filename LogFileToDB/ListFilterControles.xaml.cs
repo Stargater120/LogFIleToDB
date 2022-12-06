@@ -21,17 +21,22 @@ namespace LogFileToDB
     public partial class ListFilterControles : UserControl
     {
         public event EventHandler FilterSelected;
-        private readonly QueryRepository queryRepository;
-        public ListFilterControles(QueryRepository queryRepository)
+        public ListFilterControles()
         {
             InitializeComponent();
-            this.queryRepository = queryRepository;
+            MethodePicker.ItemsSource = DisplayedLists._methodEntrys;
+            StatusPicker.ItemsSource = DisplayedLists._statusEntrys;
         }
 
-        private void FillComboBoxes()
-        {
-
-        }
+        //private async void FillComboBoxes()
+        //{
+        //    var methodList = new List<string>();
+        //    await foreach (var entry in MainWindow._queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Method))
+        //    {
+        //        methodList.Add(entry);
+        //    }
+        //    MethodePicker.ItemsSource = methodList;
+        //}
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

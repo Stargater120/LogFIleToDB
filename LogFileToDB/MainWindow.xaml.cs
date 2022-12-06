@@ -29,15 +29,27 @@ namespace LogFileToDB
     public partial class MainWindow : Window
     {
         private readonly CommandRepository _repository;
-        private readonly QueryRepository _queryRepository;
-        private readonly DisplayedLists _displayedLists;
+        public readonly QueryRepository _queryRepository;
         public static LogEntriesFilter entriesFilter = new LogEntriesFilter();
-        public MainWindow(CommandRepository repository, QueryRepository queryRepository, DisplayedLists displayedLists)
+        public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
-            InitializeComponent();
+            
             _repository = repository;
             _queryRepository = queryRepository;
-            _displayedLists = displayedLists;
+            FillComboBoxes();
+            InitializeComponent();
+        }
+
+        private async void FillComboBoxes()
+        {
+            await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Method))
+            {
+                DisplayedLists._methodEntrys.Add(entry);
+            }
+            await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Code))
+            {
+                DisplayedLists._statusEntrys.Add(entry);
+            }
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)

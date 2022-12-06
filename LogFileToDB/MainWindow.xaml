@@ -27,7 +27,7 @@
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
-                    <controls:ListFilterControles />
+                    <controls:ListFilterControles x:Name="test1"/>
                     <!--open File Btn-->
                     <Button Background="White"  Width="100" Height="30" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Top" Margin="10,0,10,0" Grid.Row="1" />
                     <!--Logs table-->

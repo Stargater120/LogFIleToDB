@@ -11,10 +11,12 @@ namespace Core
     public class DisplayedLists
     {
         private ObservableCollection<LogEntry> _logEntrys = new ObservableCollection<LogEntry>();
-        public ObservableCollection<LogEntry> _ipTabEntrys = new ObservableCollection<LogEntry>();
-        public ObservableCollection<LogEntry> _methodenTabEntrys = new ObservableCollection<LogEntry>();
-        public ObservableCollection<LogEntry> _statusTabEntrys = new ObservableCollection<LogEntry>();
-        public ObservableCollection<LogFile> _loadedFilesEntrys = new ObservableCollection<LogFile>();
+        public static ObservableCollection<LogEntry> _ipTabEntrys = new ObservableCollection<LogEntry>();
+        public static ObservableCollection<LogEntry> _methodenTabEntrys = new ObservableCollection<LogEntry>();
+        public static ObservableCollection<LogEntry> _statusTabEntrys = new ObservableCollection<LogEntry>();
+        public static ObservableCollection<LogFile> _loadedFilesEntrys = new ObservableCollection<LogFile>();
+        public static ObservableCollection<string> _methodEntrys = new ObservableCollection<string>();
+        public static ObservableCollection<string> _statusEntrys = new ObservableCollection<string>();
 
         public ObservableCollection<LogEntry> LogEntrys
         {

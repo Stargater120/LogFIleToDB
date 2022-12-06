@@ -76,20 +76,15 @@ namespace Core
         /// <param name="searchValue">if filter offers textsearch param is used to add user input to query</param>
         /// <param name="offset">used to load more values if reuquested</param>
         /// <returns></returns>
-        public IAsyncEnumerable<string> GetOptionsForFilter(OrderingProperties filterType, string? searchValue, int offset) 
+        public IAsyncEnumerable<string> GetOptionsForFilter(OrderingProperties filterType) 
         {
             var columnName = columnNames[filterType];
 
             string query = $"SELECT DISTINCT {columnName} FROM log_entry";                              
 
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                query += $" WHERE {columnName} LIKE '%' || @searchValue || '%' ";
-            }
-
-            query += $" ORDER BY {columnName} ASC LIMIT 10 OFFSET @offset";            
+            query += $" ORDER BY {columnName} ASC";            
             
-            return GetOptionsForMultiselectAsync(query, searchValue, offset);
+            return GetOptionsForMultiselectAsync(query);
         }
         /// <summary>
         /// Gets the min and max value to use as constraints in DateTimePickers
