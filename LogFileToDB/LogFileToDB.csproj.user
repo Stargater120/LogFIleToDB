@@ -10,7 +10,7 @@
     <Compile Update="IPInput.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ListFilterControle.xaml.cs">
+    <Compile Update="ListFilterControles.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,7 +18,7 @@
     <Page Update="IPInput.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ListFilterControle.xaml">
+    <Page Update="ListFilterControles.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

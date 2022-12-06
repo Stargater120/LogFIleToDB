@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Github\LogFIleToDB\LogFileToDB\obj\Debug\netcoreapp3.1\
+C:\Users\Tobia\OneDrive\Dokumente\School\LF8\Project\LogFileToDB\LogFileToDB\obj\Debug\netcoreapp3.1\
 LogFileToDB
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-D:\Github\LogFIleToDB\LogFileToDB\App.xaml
-31369369730
+C:\Users\Tobia\OneDrive\Dokumente\School\LF8\Project\LogFileToDB\LogFileToDB\App.xaml
+31110459849
 
-7-514298515
-2021989623725
-IPInput.xaml;ListFilterControle.xaml;MainWindow.xaml;
+7-392531354
+2021380175054
+IPInput.xaml;ListFilterControles.xaml;MainWindow.xaml;
 
-True
+False
 
