@@ -533,6 +533,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Core >= 1.0.0",
+      "Database >= 1.0.0",
       "Microsoft.Extensions.DependencyInjection >= 3.1.30",
       "System.Data.SQLite.Core >= 1.0.116",
       "System.Linq.Async >= 6.0.1"
@@ -573,6 +574,9 @@
           "projectReferences": {
             "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
               "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj"
+            },
+            "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj": {
+              "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj"
             }
           }
         }

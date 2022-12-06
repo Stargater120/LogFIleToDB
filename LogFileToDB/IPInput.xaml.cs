@@ -50,6 +50,27 @@ namespace LogFileToDB
                 }
                 ipTextBox._suppressAddressUpdate = false;
             }
+            if (ipTextBox._segments[3].Text.Length > 0)
+            {
+                ipTextBox.SetIPAddress(ipTextBox);
+            }
+
+        }
+
+        private void SetIPAddress(IPInput ipTextBox)
+        {
+            string ipAddress = "";
+            int i = 0;
+            foreach(var segment in ipTextBox._segments)
+            {
+                ipAddress += segment.Text;
+                if(i != 3)
+                {
+                    ipAddress += ".";
+                }
+                i++;
+            }
+            MainWindow.entriesFilter.AddIPAddress(ipAddress);
         }
 
         public string Address

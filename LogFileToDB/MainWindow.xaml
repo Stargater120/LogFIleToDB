@@ -76,7 +76,8 @@
                         <RowDefinition Height="65"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--Filter Component--><!-- FilterSelected="ListFilterControles_FilterSelected"-->
+                    <!--Filter Component-->
+                    <!-- FilterSelected="ListFilterControles_FilterSelected"-->
                     <controls:ListFilterControles />
                     <!--open File Btn-->
                     <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >

@@ -171,6 +171,9 @@
             "projectReferences": {
               "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
                 "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj"
+              },
+              "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj": {
+                "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj"
               }
             }
           }
