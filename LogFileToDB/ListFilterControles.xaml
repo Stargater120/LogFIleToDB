@@ -11,13 +11,12 @@
         <!--Date Picker-->
         <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
         <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
-        <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
-        <DatePicker Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+        <control:DateTimeInput Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+        <control:DateTimeInput Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+        
         <!--ip filter-->
-        <Label Foreground="AliceBlue" Content="Filters:" HorizontalAlignment="Left" Margin="425,0,0,0" VerticalAlignment="Center"/>
-        <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Center"/>
-        <!--<TextBox x:Name="IP_Input" TextChanged="TextBox_TextChanged" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0"/>-->
-        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="497,0,0,0"/>
+        <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Center"/>
+        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="447,0,0,0"/>
 
         <!--methode filter-->
         <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
@@ -41,5 +40,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <Button Width="75" VerticalAlignment="Center" Height="35" Margin="1030" Background="White" Cursor="Hand" Content="Filtern"></Button>
     </Grid>
 </UserControl>

@@ -6,51 +6,120 @@
         xmlns:controls="clr-namespace:LogFileToDB"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="700"
-        Width="1200"
+        MinHeight="700"
+        MinWidth="1250"
+         Height="700"
+        Width="1250"
         Topmost="True"
         
         WindowStartupLocation="CenterScreen">
-    <Grid >
+    <Window.Resources>
+
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border Name="Border" Background="#636e72" BorderBrush="#636e72" BorderThickness="1">
+                                <ContentPresenter x:Name="TitleContent" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="	#e5f2ff" />
+                                <Setter Property="Height" Value="40"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="white" />
+                                <Setter Property="Height" Value="35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="#1c2021">
+
         <!--Tabs Menu-->
-        <TabControl>
+        <TabControl Background="#2d3436" BorderBrush="#636e72" BorderThickness="0"  Margin="30,15,30,30">
+            <TabControl.Effect>
+                <DropShadowEffect Direction="-90" BlurRadius="15" ShadowDepth="2" />
+            </TabControl.Effect>
+            <TabControl.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="0,5,5,5"/>
+                </Style>
+            </TabControl.Resources>
             <!--ProtokollPage-->
-            <TabItem Header="Protokollliste">
-                <Grid Background="#2d3436">
+            <TabItem Margin="-2,0,0,0">
+                <TabItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5,0,0,0"/>
+                    </Style>
+                </TabItem.Resources>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/4901/4901662.png" Width="25" Height="25"  Margin="0,0,3,0" />
+                        <TextBlock Text="Protokollliste" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="#2d3436" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="65"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
                     <controls:ListFilterControles x:Name="test1"/>
                     <!--open File Btn-->
-                    <Button Background="White"  Width="100" Height="30" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Top" Margin="10,0,10,0" Grid.Row="1" />
+                    <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
+                       
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                     <!--Logs table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="2" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" Grid.Row="2" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=IPAddress}" Width="185" />
                             <DataGridTextColumn Header="Datum"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=TimeStamp}" Width="185" />
                             <DataGridTextColumn Header="Methode"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=Method}" Width="*" />
                             <DataGridTextColumn Header="URL"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=URL}" Width="*" />
                             <DataGridTextColumn Header="Status"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=StatusCode}" Width="*" />
                             <DataGridTextColumn Header="Ansprechzeit"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=ResponseTime}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
             <!--IP-Adressen Page-->
-            <TabItem Header="IP-Adressen">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <Image Source="https://cdn-icons-png.flaticon.com/128/6802/6802090.png" Width="25" Height="25"  Margin="0,0,3,0" />
+                        <TextBlock Text="IP-Adressen" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Background="#2d3436">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -61,8 +130,13 @@
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <controls:ListFilterControles/>
-                    <!--Logs IP Table--> 
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <!--Logs IP Table-->
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
                       Binding="{Binding }" Width="*" />
@@ -74,7 +148,13 @@
             </TabItem>
             
             <!--Methoden Page-->
-            <TabItem Header="Methoden" >
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <Image Source="https://dt-cdn.net/hub/ETL_Service_icon.png" Width="24" Height="24" Margin="0,0,3,0" />
+                        <TextBlock Text="Methoden" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Background="#2d3436">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -86,7 +166,12 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles/>
                     <!--Logs Methods Table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
+                        <DataGrid.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Methoden"
                       Binding="{Binding }" Width="*" />
@@ -98,7 +183,13 @@
             </TabItem>
             
             <!--Status Page-->
-            <TabItem Header="Status" >
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/4661/4661519.png" Width="25" Height="25"  Margin="0,0,3,0" />
+                        <TextBlock Text="Status" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Background="#2d3436">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -110,7 +201,12 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles/>
                     <!--Logs Methode Table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                        <DataGrid.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Status"
                       Binding="{Binding }" Width="*" />
@@ -122,10 +218,26 @@
             </TabItem>
             
             <!--Geladene Dateien Page-->
-            <TabItem Header="Geladene Dateien anzeigen">
+            <TabItem>
+                <TabItem.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0,5,0,0"/>
+                    </Style>
+                </TabItem.Resources>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <Image Source="https://cdn-icons-png.flaticon.com/512/217/217861.png" Width="25" Height="25"  Margin="0,0,3,0" />
+                        <TextBlock Text="Geladene Dateien anzeigen" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Background="#2d3436">
                     <!--Table With uploaded Files-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="2" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                    <DataGrid CanUserReorderColumns="False" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                        <DataGrid.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Dateiname"
                       Binding="{Binding }" Width="*" />

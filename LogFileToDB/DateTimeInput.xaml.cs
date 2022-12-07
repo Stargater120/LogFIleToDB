@@ -6,9 +6,9 @@ using System.Windows.Input;
 namespace LogFileToDB
 {
     /// <summary>
-    /// Interaktionslogik für IPInput.xaml
+    /// Interaktionslogik für DateTimeInput.xaml
     /// </summary>
-    public partial class IPInput : UserControl
+    public partial class DateTimeInput : UserControl
     {
         private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, Key.NumPad0, Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9 };
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
@@ -17,93 +17,76 @@ namespace LogFileToDB
 
         private readonly List<TextBox> _segments = new List<TextBox>();
 
-        private bool _suppressAddressUpdate = false;
+        private bool _suppressDateTimeUpdate = false;
 
-        public IPInput()
+        public DateTimeInput()
         {
             InitializeComponent();
             _segments.Add(FirstSegment);
             _segments.Add(SecondSegment);
-            _segments.Add(ThirdSegment);
-            _segments.Add(LastSegment);
+            _segments.Add(YearSegment);
+            _segments.Add(HoursSegment);
+            _segments.Add(MinutesSegment);
+            _segments.Add(SecondsSegment);
+
         }
 
-        public static readonly DependencyProperty AddressProperty = DependencyProperty.Register(
-            "Address", typeof(string), typeof(IPInput), new FrameworkPropertyMetadata(default(string), AddressChanged)
+        public static readonly DependencyProperty DateTimeProperty = DependencyProperty.Register(
+            "Address", typeof(string), typeof(DateTimeInput), new FrameworkPropertyMetadata(default(string), AddressChanged)
             {
                 BindsTwoWayByDefault = true
             });
 
         private static void AddressChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var ipTextBox = dependencyObject as IPInput;
+            var dtTextBox = dependencyObject as DateTimeInput;
             var text = e.NewValue as string;
+            char[] chars = { '.', ':' };
 
-            if (text != null && ipTextBox != null)
+            if (text != null && dtTextBox != null)
             {
-                ipTextBox._suppressAddressUpdate = true;
+                dtTextBox._suppressDateTimeUpdate = true;
                 var i = 0;
-                foreach (var segment in text.Split('.'))
+                foreach (var segment in text.Split(chars))
                 {
-                    ipTextBox._segments[i].Text = segment;
+                    dtTextBox._segments[i].Text = segment;
                     i++;
                 }
-                ipTextBox._suppressAddressUpdate = false;
+                dtTextBox._suppressDateTimeUpdate = false;
             }
-            if (ipTextBox._segments[3].Text.Length > 0)
-            {
-                ipTextBox.SetIPAddress(ipTextBox);
-            }
-
         }
 
-        private void SetIPAddress(IPInput ipTextBox)
+        public string DateTime
         {
-            string ipAddress = "";
-            int i = 0;
-            foreach(var segment in ipTextBox._segments)
-            {
-                ipAddress += segment.Text;
-                if(i != 3)
-                {
-                    ipAddress += ".";
-                }
-                i++;
-            }
-            MainWindow.entriesFilter.AddIPAddress(ipAddress);
-        }
-
-        public string Address
-        {
-            get { return (string)GetValue(AddressProperty); }
-            set { SetValue(AddressProperty, value); }
+            get { return (string)GetValue(DateTimeProperty); }
+            set { SetValue(DateTimeProperty, value); }
         }
 
         private void UIElement_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (DigitKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelDigitKeyPress();
-                HandleDigitPress();
+                e.Handled = ShouldCancelDigitKeyPress(sender as TextBox);
+                HandleDigitPress(sender as TextBox);
             }
             else if (MoveBackwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelBackwardKeyPress();
-                HandleBackwardKeyPress();
+                e.Handled = ShouldCancelBackwardKeyPress(sender as TextBox);
+                HandleBackwardKeyPress(sender as TextBox);
             }
             else if (MoveForwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelForwardKeyPress();
-                HandleForwardKeyPress();
+                e.Handled = ShouldCancelForwardKeyPress(sender as TextBox);
+                HandleForwardKeyPress(sender as TextBox);
             }
             else if (e.Key == Key.Back)
             {
-                HandleBackspaceKeyPress();
+                HandleBackspaceKeyPress(sender as TextBox);
             }
             else if (e.Key == Key.OemPeriod)
             {
                 e.Handled = true;
-                HandlePeriodKeyPress();
+                HandlePeriodKeyPress(sender as TextBox);
             }
             else
             {
@@ -120,50 +103,84 @@ namespace LogFileToDB
                    OtherAllowedKeys.Contains(e.Key);
         }
 
-        private void HandleDigitPress()
+        private void HandleDigitPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
+            bool isYear = false;
 
-            if (currentTextBox != null && currentTextBox.Text.Length == 3 &&
-                currentTextBox.CaretIndex == 3 && currentTextBox.SelectedText.Length == 0)
+            if (currentTextBox != null)
+            {
+                isYear = currentTextBox.Name == YearSegment.Name;
+            }
+
+            if (currentTextBox != null && !isYear && currentTextBox.Text.Length == 2 &&
+                currentTextBox.CaretIndex == 2 && currentTextBox.SelectedText.Length == 0)
+            {
+                MoveFocusToNextSegment(currentTextBox);
+            }
+            if (currentTextBox != null && isYear && currentTextBox.Text.Length == 4 &&
+                currentTextBox.CaretIndex == 4 && currentTextBox.SelectedText.Length == 0)
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
         }
 
-        private bool ShouldCancelDigitKeyPress()
+        private bool ShouldCancelDigitKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
+            bool isYear = false;
+
+            if (currentTextBox != null)
+            {
+                isYear = currentTextBox.Name == YearSegment.Name;
+            }
+            if (!isYear)
+            {
+                return currentTextBox != null &&
+                   currentTextBox.Text.Length == 2 &&
+                   currentTextBox.CaretIndex == 2 &&
+                   currentTextBox.SelectedText.Length == 0;
+            }
             return currentTextBox != null &&
-                   currentTextBox.Text.Length == 3 &&
-                   currentTextBox.CaretIndex == 3 &&
+                   currentTextBox.Text.Length == 4 &&
+                   currentTextBox.CaretIndex == 4 &&
                    currentTextBox.SelectedText.Length == 0;
         }
 
         private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_suppressAddressUpdate)
+            if (!_suppressDateTimeUpdate)
             {
-                Address = string.Format("{0}.{1}.{2}.{3}", FirstSegment.Text, SecondSegment.Text, ThirdSegment.Text, LastSegment.Text);
+                DateTime = string.Format("{0}.{1}.{2} {3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text, YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
             }
 
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender as TextBox;
+            bool isYear = false;
 
-            if (currentTextBox != null && currentTextBox.Text.Length == 3 && currentTextBox.CaretIndex == 3)
+            if (currentTextBox != null)
+            {
+                isYear = currentTextBox.Name == YearSegment.Name;
+            }
+
+            if (currentTextBox != null && !isYear && currentTextBox.Text.Length == 2 && currentTextBox.CaretIndex == 2)
+            {
+                MoveFocusToNextSegment(currentTextBox);
+            }
+            if (currentTextBox != null && isYear && currentTextBox.Text.Length == 4 && currentTextBox.CaretIndex == 4)
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
         }
 
-        private bool ShouldCancelBackwardKeyPress()
+        private bool ShouldCancelBackwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
             return currentTextBox != null && currentTextBox.CaretIndex == 0;
         }
 
-        private void HandleBackspaceKeyPress()
+        private void HandleBackspaceKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == 0 && currentTextBox.SelectedText.Length == 0)
             {
@@ -171,9 +188,9 @@ namespace LogFileToDB
             }
         }
 
-        private void HandleBackwardKeyPress()
+        private void HandleBackwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == 0)
             {
@@ -181,15 +198,24 @@ namespace LogFileToDB
             }
         }
 
-        private bool ShouldCancelForwardKeyPress()
+        private bool ShouldCancelForwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
-            return currentTextBox != null && currentTextBox.CaretIndex == 3;
+            var currentTextBox = sender;
+            bool isYear = false;
+
+            if (currentTextBox != null)
+            {
+                isYear = currentTextBox.Name == YearSegment.Name;
+            }
+
+            if (!isYear)
+            { return currentTextBox != null && currentTextBox.CaretIndex == 4; }
+            return currentTextBox != null && currentTextBox.CaretIndex == 2;
         }
 
-        private void HandleForwardKeyPress()
+        private void HandleForwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
@@ -197,9 +223,9 @@ namespace LogFileToDB
             }
         }
 
-        private void HandlePeriodKeyPress()
+        private void HandlePeriodKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.Text.Length > 0 && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
@@ -220,7 +246,7 @@ namespace LogFileToDB
 
         private void MoveFocusToNextSegment(TextBox currentTextBox)
         {
-            if (!ReferenceEquals(currentTextBox, LastSegment))
+            if (!ReferenceEquals(currentTextBox, SecondsSegment))
             {
                 currentTextBox.SelectionLength = 0;
                 currentTextBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
@@ -247,3 +273,4 @@ namespace LogFileToDB
         }
     }
 }
+

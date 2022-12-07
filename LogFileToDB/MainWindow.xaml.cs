@@ -1,25 +1,6 @@
 ﻿using Core;
-using Core.Models;
-using Database;
-using Database.Models;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LogFileToDB
 {
@@ -33,7 +14,6 @@ namespace LogFileToDB
         public static LogEntriesFilter entriesFilter = new LogEntriesFilter();
         public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
-            
             _repository = repository;
             _queryRepository = queryRepository;
             FillComboBoxes();
@@ -50,6 +30,15 @@ namespace LogFileToDB
             {
                 DisplayedLists._statusEntrys.Add(entry);
             }
+            _displayedLists = displayedLists;
+            InitializeLists();
+        }
+
+        private async void InitializeLists()
+        {
+            await _queryRepository.GetAllLogEntriesAsync();
+            _displayedLists = _queryRepository._displayedLists;
+            requestsGrid.ItemsSource = _displayedLists.LogEntrys;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
@@ -77,6 +66,7 @@ namespace LogFileToDB
             }
            
         }
+       
 
         //private void ListFilterControles_FilterSelected(object sender, DependencyPropertyChangedEventArgs e)
         //{
