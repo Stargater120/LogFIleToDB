@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Models;
 using Microsoft.Win32;
 using System.Windows;
 
@@ -30,15 +31,12 @@ namespace LogFileToDB
             {
                 DisplayedLists._statusEntrys.Add(entry);
             }
-            _displayedLists = displayedLists;
-            InitializeLists();
         }
 
         private async void InitializeLists()
         {
             await _queryRepository.GetAllLogEntriesAsync();
-            _displayedLists = _queryRepository._displayedLists;
-            requestsGrid.ItemsSource = _displayedLists.LogEntrys;
+            requestsGrid.ItemsSource = DisplayedLists.LogEntrys;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
