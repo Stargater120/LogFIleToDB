@@ -8,5 +8,10 @@ namespace Core
     public class EmitEvent : EventArgs
     {
         public LogEntriesFilter logEntries;
+
+        public EmitEvent()
+        {
+            logEntries = new LogEntriesFilter();
+        }
     }
 }

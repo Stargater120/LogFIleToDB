@@ -1,6 +1,7 @@
 ﻿using Core;
 using Core.Models;
 using Microsoft.Win32;
+using System;
 using System.Windows;
 
 namespace LogFileToDB
@@ -76,7 +77,7 @@ namespace LogFileToDB
         private async void IPFilters_FilterSelected(object sender, EmitEvent e)
         {
             DisplayedLists.Clear("IPEntries");
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP ,e.logEntries))
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, e.logEntries))
             {
                 DisplayedLists._ipTabEntries.Add(entry);
             }

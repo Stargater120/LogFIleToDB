@@ -21,7 +21,7 @@ namespace LogFileToDB
     /// </summary>
     public partial class ListFilterControles : UserControl
     {
-        public event EventHandler FilterSelected;
+        public event EventHandler<EmitEvent> FilterSelected;
         public LogEntriesFilter logEntries;
         public ListFilterControles()
         {
