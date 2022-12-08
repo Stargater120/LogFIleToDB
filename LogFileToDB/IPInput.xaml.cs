@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Core;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +16,7 @@ namespace LogFileToDB
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
+        public event EventHandler<EmitEvent> EmitIP;
 
         private readonly List<TextBox> _segments = new List<TextBox>();
 
@@ -50,11 +53,22 @@ namespace LogFileToDB
                 }
                 ipTextBox._suppressAddressUpdate = false;
             }
-            if (ipTextBox._segments[3].Text.Length > 0)
+            if (ipTextBox.CheckSegments())
             {
                 ipTextBox.SetIPAddress(ipTextBox);
             }
 
+        }
+
+        private bool CheckSegments()
+        {
+            bool areAllFilled = false;
+            foreach (var segment in _segments)
+            {
+                areAllFilled = segment.Text.Length > 0;
+            }
+
+            return areAllFilled;
         }
 
         private void SetIPAddress(IPInput ipTextBox)
@@ -70,7 +84,9 @@ namespace LogFileToDB
                 }
                 i++;
             }
-            MainWindow.entriesFilter.AddIPAddress(ipAddress);
+            var emit = new EmitEvent();
+            emit.IPAddress = ipAddress;
+            EmitIP(this, emit);
         }
 
         public string Address

@@ -40,6 +40,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Click="Search" Width="75" VerticalAlignment="Center" Height="35" Margin="1080, 0" Background="White" Cursor="Hand" Content="Filtern"></Button>
+        <Button Click="Search" Width="75" Height="25" VerticalAlignment="Top" Margin="20, 10, 0 , 0" Content="Search"></Button>
     </Grid>
 </UserControl>

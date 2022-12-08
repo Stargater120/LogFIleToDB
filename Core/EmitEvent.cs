@@ -8,6 +8,7 @@ namespace Core
     public class EmitEvent : EventArgs
     {
         public LogEntriesFilter logEntries;
+        public string IPAddress;
 
         public EmitEvent()
         {

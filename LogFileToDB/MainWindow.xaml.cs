@@ -13,13 +13,13 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         public readonly QueryRepository _queryRepository;
-        public static LogEntriesFilter entriesFilter = new LogEntriesFilter();
         public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             _repository = repository;
             _queryRepository = queryRepository;
             FillComboBoxes();
             InitializeComponent();
+            InitializeLists();
         }
 
         private async void FillComboBoxes()
