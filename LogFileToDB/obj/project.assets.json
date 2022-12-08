@@ -520,23 +520,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tobia\\.nuget\\packages\\": {},
+    "C:\\Users\\Denis Zaborosciuc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "projectUniqueName": "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
       "projectName": "LogFileToDB",
-      "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
-      "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\obj\\",
+      "projectPath": "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+      "packagesPath": "C:\\Users\\Denis Zaborosciuc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\LogFileToDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Denis Zaborosciuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -551,11 +551,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj"
+            "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\Core\\Core.csproj"
             },
-            "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj": {
-              "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj"
+            "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\Database\\Database.csproj": {
+              "projectPath": "C:\\Users\\Denis Zaborosciuc\\Desktop\\LogFIleToDB\\Database\\Database.csproj"
             }
           }
         }
@@ -601,7 +601,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
       }
     }
   }
