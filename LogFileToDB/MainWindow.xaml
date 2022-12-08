@@ -78,7 +78,7 @@
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
-                    <controls:ListFilterControles x:Name="test1"/>
+                    <controls:ListFilterControles x:Name="ProtokolFilters" FilterSelected="ProtokolFilters_FilterSelected"/>
                     <!--open File Btn-->
                     <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
                        
@@ -129,7 +129,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="IPFilters" FilterSelected="IPFilters_FilterSelected"/>
                     <!--Logs IP Table-->
                     <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
@@ -164,7 +164,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="MethodFilters" FilterSelected="MethodFilters_FilterSelected"/>
                     <!--Logs Methods Table-->
                     <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
@@ -199,7 +199,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="StatusFilter" FilterSelected="StatusFilter_FilterSelected"/>
                     <!--Logs Methode Table-->
                     <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>

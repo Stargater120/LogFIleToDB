@@ -37,7 +37,7 @@ namespace Core
 
             await foreach (var entrys in GetEntriesAsync(null, query))
             {
-                DisplayedLists.LogEntrys.Add(entrys);
+                DisplayedLists._logEntrys.Add(entrys);
             }
         }
 

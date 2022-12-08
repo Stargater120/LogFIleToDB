@@ -1,4 +1,5 @@
-﻿using Database.Models;
+﻿using Core.Models;
+using Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,29 +8,29 @@ namespace Core
 {
     public class DisplayedLists
     {
-        private static ObservableCollection<LogEntry> _logEntrys = new ObservableCollection<LogEntry>();
-        public static ObservableCollection<LogEntry> _ipTabEntrys = new ObservableCollection<LogEntry>();
-        public static ObservableCollection<LogEntry> _methodenTabEntrys = new ObservableCollection<LogEntry>();
-        public static ObservableCollection<LogEntry> _statusTabEntrys = new ObservableCollection<LogEntry>();
-        public static ObservableCollection<LogFile> _loadedFilesEntrys = new ObservableCollection<LogFile>();
-        public static ObservableCollection<string> _methodEntrys = new ObservableCollection<string>();
-        public static ObservableCollection<string> _statusEntrys = new ObservableCollection<string>();
+        public static ObservableCollection<LogEntry> _logEntrys = new ObservableCollection<LogEntry>();
+        public static ObservableCollection<AttributeWithCount> _ipTabEntries = new ObservableCollection<AttributeWithCount>();
+        public static ObservableCollection<AttributeWithCount> _methodenTabEntries = new ObservableCollection<AttributeWithCount>();
+        public static ObservableCollection<AttributeWithCount> _statusTabEntries = new ObservableCollection<AttributeWithCount>();
+        public static ObservableCollection<LogFile> _loadedFilesEntries = new ObservableCollection<LogFile>();
+        public static ObservableCollection<string> _methodEntries = new ObservableCollection<string>();
+        public static ObservableCollection<string> _statusEntries = new ObservableCollection<string>();
 
-        public static ObservableCollection<LogEntry> LogEntrys
-        {
-            get => _logEntrys;
-            set
-            {
-                _logEntrys = value;
-            }
-        }
-
-        public void Clear(string listName)
+        public static void Clear(string listName)
         {
             switch (listName)
             {
                 case "LogEntry":
                     _logEntrys.Clear();
+                    break;
+                case "IPEntries":
+                    _ipTabEntries.Clear();
+                    break;
+                case "MethodEntries":
+                    _methodenTabEntries.Clear();
+                    break;
+                case "StatusEntries":
+                    _statusTabEntries.Clear();
                     break;
             }
         }

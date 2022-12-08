@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,22 +22,14 @@ namespace LogFileToDB
     public partial class ListFilterControles : UserControl
     {
         public event EventHandler FilterSelected;
+        public LogEntriesFilter logEntries;
         public ListFilterControles()
         {
             InitializeComponent();
-            MethodePicker.ItemsSource = DisplayedLists._methodEntrys;
-            StatusPicker.ItemsSource = DisplayedLists._statusEntrys;
+            MethodePicker.ItemsSource = DisplayedLists._methodEntries;
+            StatusPicker.ItemsSource = DisplayedLists._statusEntries;
+            logEntries = new LogEntriesFilter();
         }
-
-        //private async void FillComboBoxes()
-        //{
-        //    var methodList = new List<string>();
-        //    await foreach (var entry in MainWindow._queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Method))
-        //    {
-        //        methodList.Add(entry);
-        //    }
-        //    MethodePicker.ItemsSource = methodList;
-        //}
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -48,9 +41,11 @@ namespace LogFileToDB
 
         }
 
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    FilterSelected(this, e);
-        //}
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            var emit = new EmitEvent();
+            emit.logEntries = logEntries;
+            FilterSelected(this, emit);
+        }
     }
 }

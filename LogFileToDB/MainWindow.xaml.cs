@@ -25,18 +25,18 @@ namespace LogFileToDB
         {
             await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Method))
             {
-                DisplayedLists._methodEntrys.Add(entry);
+                DisplayedLists._methodEntries.Add(entry);
             }
             await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Code))
             {
-                DisplayedLists._statusEntrys.Add(entry);
+                DisplayedLists._statusEntries.Add(entry);
             }
         }
 
         private async void InitializeLists()
         {
             await _queryRepository.GetAllLogEntriesAsync();
-            requestsGrid.ItemsSource = DisplayedLists.LogEntrys;
+            requestsGrid.ItemsSource = DisplayedLists._logEntrys;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
@@ -62,9 +62,44 @@ namespace LogFileToDB
                     MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen");
                 }
             }
-           
         }
-       
+
+        private async void ProtokolFilters_FilterSelected(object sender, EmitEvent e)
+        {
+            DisplayedLists.Clear("LogEntry");
+            await foreach (var entry in _queryRepository.GetFilteredLogEntriesAsync(e.logEntries))
+            {
+                DisplayedLists._logEntrys.Add(entry);
+            }
+        }
+
+        private async void IPFilters_FilterSelected(object sender, EmitEvent e)
+        {
+            DisplayedLists.Clear("IPEntries");
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP ,e.logEntries))
+            {
+                DisplayedLists._ipTabEntries.Add(entry);
+            }
+        }
+
+        private async void MethodFilters_FilterSelected(object sender, EmitEvent e)
+        {
+            DisplayedLists.Clear("MethodEntries");
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, e.logEntries))
+            {
+                DisplayedLists._methodenTabEntries.Add(entry);
+            }
+        }
+
+        private async void StatusFilter_FilterSelected(object sender, EmitEvent e)
+        {
+            DisplayedLists.Clear("StatusEntries");
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, e.logEntries))
+            {
+                DisplayedLists._statusTabEntries.Add(entry);
+            }
+        }
+
 
         //private void ListFilterControles_FilterSelected(object sender, DependencyPropertyChangedEventArgs e)
         //{

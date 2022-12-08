@@ -16,11 +16,11 @@
         
         <!--ip filter-->
         <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Center"/>
-        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="447,0,0,0"/>
+        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="427,0,0,0"/>
 
         <!--methode filter-->
-        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="760,0,0,0">
+        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="620,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="680,0,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -30,8 +30,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <!--status filter-->
-        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="965,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="1009,0,0,0">
+        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="845,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="890,0,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -40,6 +40,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Width="75" VerticalAlignment="Center" Height="35" Margin="1030" Background="White" Cursor="Hand" Content="Filtern"></Button>
+        <Button Click="Search" Width="75" VerticalAlignment="Center" Height="35" Margin="1080, 0" Background="White" Cursor="Hand" Content="Filtern"></Button>
     </Grid>
 </UserControl>
