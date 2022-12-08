@@ -17,7 +17,7 @@ namespace LogFileToDB
         {
             _repository = repository;
             _queryRepository = queryRepository;
-            FillComboBoxes();
+            //FillComboBoxes();
             InitializeComponent();
             InitializeLists();
         }
@@ -99,6 +99,11 @@ namespace LogFileToDB
             {
                 DisplayedLists._statusTabEntries.Add(entry);
             }
+        }
+
+        private void ProtokolFilters_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
