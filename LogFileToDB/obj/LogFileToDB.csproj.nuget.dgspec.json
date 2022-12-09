@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {}
+    "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj": {}
   },
   "projects": {
-    "D:\\Github\\LogFIleToDB\\Core\\Core.csproj": {
+    "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\Core\\obj\\",
+        "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj"
+              "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj": {
+                "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj"
               }
             }
           }
@@ -54,8 +53,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -67,21 +65,21 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
+    "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj",
+        "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj",
         "projectName": "Database",
-        "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj",
+        "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj",
         "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\Database\\obj\\",
+        "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -93,7 +91,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -123,8 +120,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -136,21 +132,21 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {
+    "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+        "projectUniqueName": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
         "projectName": "LogFileToDB",
-        "projectPath": "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+        "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\LogFileToDB.csproj",
         "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\LogFileToDB\\obj\\",
+        "outputPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\LogFileToDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -162,18 +158,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Github\\LogFIleToDB\\Core\\Core.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj"
+              "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Core\\Core.csproj"
               },
-              "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj"
+              "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj": {
+                "projectPath": "C:\\Users\\Tobia\\OneDrive\\Dokumente\\School\\LF8\\Project\\LogFileToDB\\Database\\Database.csproj"
               }
             }
           }
@@ -207,8 +202,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -220,7 +214,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
