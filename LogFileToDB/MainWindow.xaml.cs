@@ -24,6 +24,10 @@ namespace LogFileToDB
 
         private async void FillComboBoxes()
         {
+            DisplayedLists._methodEntries.Clear();
+            DisplayedLists._statusEntries.Clear();
+            DisplayedLists._methodEntries.Add(" ");
+            DisplayedLists._statusEntries.Add(" ");
             await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Method))
             {
                 DisplayedLists._methodEntries.Add(entry);
@@ -36,6 +40,7 @@ namespace LogFileToDB
 
         private async void InitializeLists()
         {
+            DisplayedLists._logEntrys.Clear();
             await _queryRepository.GetAllLogEntriesAsync();
             requestsGrid.ItemsSource = DisplayedLists._logEntrys;
         }
@@ -57,10 +62,12 @@ namespace LogFileToDB
                 {
                     await _repository.CreateLogEntrys(filePath, fileName);
                     MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    FillComboBoxes();
+                    InitializeLists();
                 }
-                catch
+                catch(Exception ex)
                 {
-                    MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
