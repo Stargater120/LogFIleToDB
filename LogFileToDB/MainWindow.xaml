@@ -150,7 +150,7 @@
             <!--Methoden Page-->
             <TabItem MouseLeftButtonDown="Methoden_Tab">
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Methoden_Tab">
                         <Image Source="https://dt-cdn.net/hub/ETL_Service_icon.png" Width="24" Height="24" Margin="0,0,3,0" />
                         <TextBlock Text="Methoden" VerticalAlignment="Center" />
                     </StackPanel>
@@ -185,7 +185,7 @@
             <!--Status Page-->
             <TabItem MouseLeftButtonDown="Status_TabItem_MouseLeftButtonDown">
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Status_TabItem_MouseLeftButtonDown">
                         <Image Source="https://cdn-icons-png.flaticon.com/512/4661/4661519.png" Width="25" Height="25"  Margin="0,0,3,0" />
                         <TextBlock Text="Status" VerticalAlignment="Center" />
                     </StackPanel>
@@ -225,7 +225,7 @@
                     </Style>
                 </TabItem.Resources>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Files_TabItem_MouseLeftButtonDown">
                         <Image Source="https://cdn-icons-png.flaticon.com/512/217/217861.png" Width="25" Height="25"  Margin="0,0,3,0" />
                         <TextBlock Text="Geladene Dateien anzeigen" VerticalAlignment="Center" />
                     </StackPanel>
