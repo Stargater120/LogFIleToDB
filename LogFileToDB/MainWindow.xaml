@@ -240,11 +240,11 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Dateiname"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=FileName}" Width="*" />
                             <DataGridTextColumn Header="Aufgeladen auf"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=LoadenOn}" Width="*" />
                             <DataGridTextColumn Header="Menge an Einträgen"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=Entries}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
