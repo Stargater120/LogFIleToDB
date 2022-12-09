@@ -17,7 +17,7 @@ namespace LogFileToDB
         {
             _repository = repository;
             _queryRepository = queryRepository;
-            //FillComboBoxes();
+            FillComboBoxes();
             InitializeComponent();
             InitializeLists();
         }
@@ -56,11 +56,11 @@ namespace LogFileToDB
                 try
                 {
                     await _repository.CreateLogEntrys(filePath, fileName);
-                    MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen");
+                    MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 catch
                 {
-                    MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen");
+                    MessageBox.Show("Diese Datei wurde bereits hinzugefügt", "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -48,5 +48,10 @@ namespace LogFileToDB
             emit.logEntries = logEntries;
             FilterSelected(this, emit);
         }
+
+        private void IPInput_EmitIP(object sender, EmitEvent e)
+        {
+            logEntries.AddIPAddress(e.IPAddress);
+        }
     }
 }

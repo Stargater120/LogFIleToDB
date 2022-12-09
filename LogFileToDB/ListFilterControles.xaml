@@ -16,7 +16,7 @@
 
         <!--ip filter-->
         <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="400,0,0,0" VerticalAlignment="Center"/>
-        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="427,0,0,0"/>
+        <control:IPInput HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="427,0,0,0" EmitIP="IPInput_EmitIP"/>
 
         <!--methode filter-->
         <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="600,0,0,0" VerticalAlignment="Center"/>
