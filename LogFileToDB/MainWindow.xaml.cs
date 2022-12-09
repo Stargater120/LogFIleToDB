@@ -72,6 +72,7 @@ namespace LogFileToDB
             {
                 DisplayedLists._logEntrys.Add(entry);
             }
+            //requestsGrid.ItemsSource = DisplayedLists._logEntrys;
         }
 
         private async void IPFilters_FilterSelected(object sender, EmitEvent e)
@@ -81,6 +82,7 @@ namespace LogFileToDB
             {
                 DisplayedLists._ipTabEntries.Add(entry);
             }
+            IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
         }
 
         private async void MethodFilters_FilterSelected(object sender, EmitEvent e)
@@ -101,9 +103,60 @@ namespace LogFileToDB
             }
         }
 
-        private void ProtokolFilters_Loaded(object sender, RoutedEventArgs e)
+        private async void IP_StackPanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if(DisplayedLists._ipTabEntries.Count > 0)
+            {
+                return;
+            }
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, new LogEntriesFilter()))
+            {
+                DisplayedLists._ipTabEntries.Add(entry);
+            }
 
+            IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
+        }
+
+        private async void Methoden_Tab(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if(DisplayedLists._methodenTabEntries.Count > 0)
+            {
+                return;
+            }
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, new LogEntriesFilter()))
+            {
+                DisplayedLists._methodenTabEntries.Add(entry);
+            }
+
+            Methoden_DataGrid.ItemsSource = DisplayedLists._methodenTabEntries;
+        }
+
+        private async void Status_TabItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (DisplayedLists._statusTabEntries.Count > 0)
+            {
+                return;
+            }
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, new LogEntriesFilter()))
+            {
+                DisplayedLists._statusTabEntries.Add(entry);
+            }
+
+            Status_DataGrid.ItemsSource = DisplayedLists._statusTabEntries;
+        }
+
+        private async void Files_TabItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if(DisplayedLists._loadedFilesEntries.Count > 0)
+            {
+                return;
+            }
+            await foreach (var entry in _queryRepository.GetAllPreviouslyLoadedFiles())
+            {
+                DisplayedLists._loadedFilesEntries.Add(entry);
+            }
+
+            Files_DataGrid.ItemsSource= DisplayedLists._loadedFilesEntries;
         }
 
 
