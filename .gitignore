@@ -357,3 +357,5 @@ LogFileToDB/obj/LogFileToDB.csproj.nuget.dgspec.json
 LogFileToDB/obj/LogFileToDB.csproj.nuget.g.props
 LogFileToDB/obj/project.assets.json
 LogFileToDB/obj/project.nuget.cache
+LogFileToDB/obj/Debug/netcoreapp3.1/App.g.i.cs
+LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.csproj.AssemblyReference.cache
