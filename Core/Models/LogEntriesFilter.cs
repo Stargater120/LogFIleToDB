@@ -6,7 +6,7 @@ namespace Core.Models
 {
     public class LogEntriesFilter
     {
-        #nullable enable
+#nullable enable
         public TimeRange? TimeRange { get; set; }
         private string? _ipAddress { get; set; }
         public string? Method { get; set; }
@@ -14,18 +14,16 @@ namespace Core.Models
         public OrderingProperties? OrderBy { get; set; }
         public Order? Order { get; set; }
 
-        public string? IPAdresses
+        public string? IPAdress
         {
-            get
-            {
-                return _ipAddress;
-            }
+            get { return _ipAddress; }
             set
             {
                 if (_ipAddress is null)
                 {
                     _ipAddress = "";
                 }
+
                 try
                 {
                     Helper.ValidateIPInput(value);
@@ -33,9 +31,9 @@ namespace Core.Models
                 }
                 catch (System.Exception)
                 {
-                    MessageBox.Show("IP addresse ist nicht in einer validen form", "IP input error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("IP addresse ist nicht in einer validen form", "IP input error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
             }
         }
     }
