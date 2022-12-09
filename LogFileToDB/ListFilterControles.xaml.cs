@@ -34,12 +34,12 @@ namespace LogFileToDB
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            logEntries.Methods = new List<string> { MethodePicker.SelectedItem as String };
+            logEntries.Method = MethodePicker.SelectedItem as String;
         }
 
         private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            logEntries.StatusCodes = new List<int> { int.Parse(StatusPicker.SelectedItem as String) };
+            logEntries.StatusCode = int.Parse(StatusPicker.SelectedItem as String);
         }
 
         private void Search(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace LogFileToDB
 
         private void IPInput_EmitIP(object sender, EmitEvent e)
         {
-            logEntries.AddIPAddress(e.IPAddress);
+            logEntries.IPAdresses = e.IPAddress;
         }
     }
 }

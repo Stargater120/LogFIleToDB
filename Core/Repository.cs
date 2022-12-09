@@ -286,34 +286,22 @@ namespace Core
                 yield return " TimeStamp >= @begin AND TimeStamp <= @end ";
             }
 
-            if (filter.IPAdresses?.Count > 0)
+            if (!string.IsNullOrWhiteSpace(filter.IPAdresses))
             {
-                IEnumerable<string> ipAdresses = filter.IPAdresses.Select((ipAdress, i) =>
-                {
-                    parameters.AddWithValue($"ipAdress{i}", filter.IPAdresses[i]);
-                    return @$"@ipAdress{i}";
-                });
-                yield return $" ip_address IN ({string.Join(",", ipAdresses)})";
+                parameters.AddWithValue($"ipAdress0", filter.IPAdresses);
+                yield return $" ip_address like (\"{filter.IPAdresses}\")";
             }
 
-            if (filter.Methods?.Count > 0)
+            if (!string.IsNullOrWhiteSpace(filter.Method))
             {
-                IEnumerable<string> methods = filter.Methods.Select((method, i) =>
-                {
-                    parameters.AddWithValue($"method{i}", filter.Methods);
-                    return $@"@method{i}";
-                });
-                yield return $" method IN ({string.Join(",", methods)})";
+                parameters.AddWithValue($"method0", filter.Method);
+                yield return $" method like (\"{filter.Method}\")";
             }
 
-            if (filter.StatusCodes?.Count > 0)
+            if (filter.StatusCode != null)
             {
-                IEnumerable<string> statusCodes = filter.StatusCodes.Select((statusCode, i) =>
-                {
-                    parameters.AddWithValue($"statusCode{i}", filter.StatusCodes[i]);
-                    return $@"@statusCode{i}";
-                });
-                yield return $" status_code IN ({string.Join(",", statusCodes)})";
+                parameters.AddWithValue($"statusCode0", filter.StatusCode);
+                yield return $" status_code = {filter.StatusCode}";
             }
         }
     }

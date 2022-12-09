@@ -8,31 +8,28 @@ namespace Core.Models
     {
         #nullable enable
         public TimeRange? TimeRange { get; set; }
-        private List<string>? _ipAdresses { get; set; }
-        public List<string>? Methods { get; set; }
-        public List<int>? StatusCodes { get; set; }
+        private string? _ipAddress { get; set; }
+        public string? Method { get; set; }
+        public int? StatusCode { get; set; }
         public OrderingProperties? OrderBy { get; set; }
         public Order? Order { get; set; }
 
-        public List<string> IPAdresses
+        public string? IPAdresses
         {
             get
             {
-                return _ipAdresses;
+                return _ipAddress;
             }
             set
             {
-                if (_ipAdresses is null)
+                if (_ipAddress is null)
                 {
-                    _ipAdresses = new List<string>();
+                    _ipAddress = "";
                 }
                 try
                 {
-                    foreach (string ip in value)
-                    {
-                        Helper.ValidateIPInput(ip);
-                    }
-                    _ipAdresses = value;
+                    Helper.ValidateIPInput(value);
+                    _ipAddress = value;
                 }
                 catch (System.Exception)
                 {
@@ -40,23 +37,6 @@ namespace Core.Models
                 }
                 
             }
-        }
-        public void AddIPAddress(string ipAddress)
-        {
-            if(_ipAdresses is null)
-            {
-                _ipAdresses = new List<string>();
-            }
-            try
-            {
-                Helper.ValidateIPInput(ipAddress);
-                _ipAdresses.Add(ipAddress);
-            }
-            catch (System.Exception)
-            {
-                MessageBox.Show("IP addresse ist nicht in einer validen form", "IP input error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
         }
     }
 }
