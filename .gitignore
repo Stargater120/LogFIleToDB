@@ -349,3 +349,11 @@ Temporary Items
 /LogFileToDB/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs
 /LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.GeneratedMSBuildEditorConfig.editorconfig
 /LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.assets.cache
+.vs/LogFileToDB/v17/.suo
+LogFileToDB/MainWindow.xaml.cs
+LogFileToDB/obj/Debug/netcoreapp3.1/App.g.i.cs
+LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.csproj.AssemblyReference.cache
+LogFileToDB/obj/LogFileToDB.csproj.nuget.dgspec.json
+LogFileToDB/obj/LogFileToDB.csproj.nuget.g.props
+LogFileToDB/obj/project.assets.json
+LogFileToDB/obj/project.nuget.cache
