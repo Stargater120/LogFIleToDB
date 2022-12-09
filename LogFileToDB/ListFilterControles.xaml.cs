@@ -26,19 +26,20 @@ namespace LogFileToDB
         public ListFilterControles()
         {
             InitializeComponent();
+            logEntries = new LogEntriesFilter();
             MethodePicker.ItemsSource = DisplayedLists._methodEntries;
             StatusPicker.ItemsSource = DisplayedLists._statusEntries;
-            logEntries = new LogEntriesFilter();
+
         }
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            logEntries.Methods = new List<string> { MethodePicker.SelectedItem as String };
         }
 
         private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            logEntries.StatusCodes = new List<int> { int.Parse(StatusPicker.SelectedItem as String) };
         }
 
         private void Search(object sender, RoutedEventArgs e)
