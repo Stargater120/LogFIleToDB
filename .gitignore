@@ -345,3 +345,16 @@ ASALocalRun/
 Network Trash Folder
 Temporary Items
 .apdisk
+/LogFileToDB/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs
+/LogFileToDB/obj/Debug/netcoreapp3.1/App.g.i.cs
+/.vs/LogFileToDB/v17/.suo
+/LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.assets.cache
+/LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.csproj.AssemblyReference.cache
+/LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.designer.runtimeconfig.json
+/LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB.GeneratedMSBuildEditorConfig.editorconfig
+/LogFileToDB/obj/Debug/netcoreapp3.1/LogFileToDB_MarkupCompile.i.cache
+/LogFileToDB/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs
+/LogFileToDB/obj/LogFileToDB.csproj.nuget.dgspec.json
+/LogFileToDB/obj/LogFileToDB.csproj.nuget.g.props
+/LogFileToDB/obj/project.assets.json
+/LogFileToDB/obj/project.nuget.cache
