@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {}
+    "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {}
   },
   "projects": {
-    "D:\\Github\\LogFIleToDB\\Core\\Core.csproj": {
+    "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\Core\\obj\\",
+        "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\kayak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kayak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,8 +33,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj"
+              "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj": {
+                "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj"
               }
             }
           }
@@ -71,20 +71,20 @@
         }
       }
     },
-    "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
+    "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj",
+        "projectUniqueName": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj",
         "projectName": "Database",
-        "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj",
-        "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\Database\\obj\\",
+        "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj",
+        "packagesPath": "C:\\Users\\kayak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kayak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -140,20 +140,20 @@
         }
       }
     },
-    "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {
+    "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+        "projectUniqueName": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
         "projectName": "LogFileToDB",
-        "projectPath": "D:\\Github\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
-        "packagesPath": "C:\\Users\\Tobia\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\LogFIleToDB\\LogFileToDB\\obj\\",
+        "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\LogFileToDB.csproj",
+        "packagesPath": "C:\\Users\\kayak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\LogFileToDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\VisualStudio\\Tools und SDKs\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tobia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kayak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -169,11 +169,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Github\\LogFIleToDB\\Core\\Core.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Core\\Core.csproj"
+              "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Core\\Core.csproj"
               },
-              "D:\\Github\\LogFIleToDB\\Database\\Database.csproj": {
-                "projectPath": "D:\\Github\\LogFIleToDB\\Database\\Database.csproj"
+              "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj": {
+                "projectPath": "C:\\Users\\kayak\\Source\\repos\\LogFIleToDB\\Database\\Database.csproj"
               }
             }
           }
