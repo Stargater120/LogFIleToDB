@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <None Remove="DB.db" />
+    <None Remove="ressources\refresh_FILL0_wght400_GRAD0_opsz48.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="DB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ressources\refresh_FILL0_wght400_GRAD0_opsz48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

@@ -50,7 +50,7 @@ namespace Core
         #nullable enable
         public IAsyncEnumerable<AttributeWithCount> GetAttributeValueWithCountAsync(OrderingProperties attribute, LogEntriesFilter? filter)
         {
-            string query = $"SELECT {columnNames[attribute]}, COUNT(*) as count FROM log_entry GROUP BY {columnNames[attribute]}";
+            string query = $"SELECT {columnNames[attribute]}, COUNT(*) as count FROM log_entry GROUP BY {columnNames[attribute]} ORDER BY count ASC";
             return GetAttributeWithCount(query, columnNames[attribute], filter);
         }
 
@@ -64,7 +64,7 @@ namespace Core
                                 response_time,
                                 ip_address,
                                 protocol
-                                FROM log_entry WHERE ";
+                                FROM log_entry";
 
             return GetEntriesAsync(filter, query);
         }

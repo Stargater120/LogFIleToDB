@@ -75,19 +75,31 @@ namespace LogFileToDB
         private async void ProtokolFilters_FilterSelected(object sender, EmitEvent e)
         {
             DisplayedLists.Clear("LogEntry");
-            await foreach (var entry in _queryRepository.GetFilteredLogEntriesAsync(e.logEntries))
+            try
             {
-                DisplayedLists._logEntrys.Add(entry);
+                await foreach (var entry in _queryRepository.GetFilteredLogEntriesAsync(e.logEntries))
+                {
+                    DisplayedLists._logEntrys.Add(entry);
+                }
             }
-            //requestsGrid.ItemsSource = DisplayedLists._logEntrys;
+            catch
+            {
+                MessageBox.Show("Für diesen Filter gibt es keine Ergebnisse.", "Ok");
+            }
         }
 
         private async void IPFilters_FilterSelected(object sender, EmitEvent e)
         {
             DisplayedLists.Clear("IPEntries");
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, e.logEntries))
+            try
             {
-                DisplayedLists._ipTabEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, e.logEntries))
+                {
+                    DisplayedLists._ipTabEntries.Add(entry);
+                }
+            } catch
+            {
+                MessageBox.Show("Für diese Filter gibt es keine Ergebnisse");
             }
             IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
         }
@@ -95,18 +107,32 @@ namespace LogFileToDB
         private async void MethodFilters_FilterSelected(object sender, EmitEvent e)
         {
             DisplayedLists.Clear("MethodEntries");
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, e.logEntries))
+            try
             {
-                DisplayedLists._methodenTabEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, e.logEntries))
+                {
+                    DisplayedLists._methodenTabEntries.Add(entry);
+                }
+            } 
+            catch
+            {
+                MessageBox.Show("Für diesen Filter gibt es keine Ergebnisse", "Ok");
             }
         }
 
         private async void StatusFilter_FilterSelected(object sender, EmitEvent e)
         {
             DisplayedLists.Clear("StatusEntries");
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, e.logEntries))
+            try
             {
-                DisplayedLists._statusTabEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, e.logEntries))
+                {
+                    DisplayedLists._statusTabEntries.Add(entry);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Für diesen Filter gibt es keine Ergebnisse", "Ok.");
             }
         }
 

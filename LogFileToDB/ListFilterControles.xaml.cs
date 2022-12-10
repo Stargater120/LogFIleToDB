@@ -23,6 +23,7 @@ namespace LogFileToDB
     {
         public event EventHandler<EmitEvent> FilterSelected;
         public LogEntriesFilter logEntries;
+        private bool supressFilterUpdate;
         public ListFilterControles()
         {
             InitializeComponent();
@@ -52,9 +53,26 @@ namespace LogFileToDB
             FilterSelected(this, emit);
         }
 
+        private void Clear_Search(object sender, RoutedEventArgs e)
+        {
+            supressFilterUpdate = true;
+            IpInput.Clear();
+            StartInput.Clear();
+            EndInput.Clear();
+            supressFilterUpdate= false;
+            LogEntriesFilter emptyFilter = new LogEntriesFilter();
+            var emit = new EmitEvent();
+            emit.logEntries = emptyFilter;
+            FilterSelected(this, emit);
+            
+        }
+
         private void IPInput_EmitIP(object sender, EmitEvent e)
         {
-            logEntries.IPAdresses = e.IPAddress;
+            if (!supressFilterUpdate)
+            {
+                logEntries.IPAdresses = e.IPAddress;
+            }
         }
     }
 }

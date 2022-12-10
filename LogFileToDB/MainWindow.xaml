@@ -97,17 +97,17 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
-                      Binding="{Binding Path=IPAddress}" Width="185" />
-                            <DataGridTextColumn Header="Datum"
-                      Binding="{Binding Path=TimeStamp}" Width="185" />
+                      Binding="{Binding Path=IPAddress}" Width="135" />
+                            <DataGridTextColumn Header="Zeitpunkt"
+                      Binding="{Binding Path=TimeStamp}" Width="165" />
                             <DataGridTextColumn Header="Methode"
-                      Binding="{Binding Path=Method}" Width="*" />
+                      Binding="{Binding Path=Method}" Width="80" />
                             <DataGridTextColumn Header="URL"
                       Binding="{Binding Path=URL}" Width="*" />
                             <DataGridTextColumn Header="Status"
-                      Binding="{Binding Path=StatusCode}" Width="*" />
+                      Binding="{Binding Path=StatusCode}" Width="80" />
                             <DataGridTextColumn Header="Ansprechzeit"
-                      Binding="{Binding Path=ResponseTime}" Width="*" />
+                      Binding="{Binding Path=ResponseTime}" Width="90" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

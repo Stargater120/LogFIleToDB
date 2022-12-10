@@ -30,6 +30,13 @@ namespace LogFileToDB
             _segments.Add(SecondsSegment);
 
         }
+        public void Clear()
+        {
+            foreach (TextBox segment in _segments)
+            {
+                segment.Clear();
+            }
+        }
 
         public static readonly DependencyProperty DateTimeProperty = DependencyProperty.Register(
             "Address", typeof(string), typeof(DateTimeInput), new FrameworkPropertyMetadata(default(string), AddressChanged)

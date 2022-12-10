@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LogFileToDB
 {
@@ -18,9 +19,10 @@ namespace LogFileToDB
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
         public event EventHandler<EmitEvent> EmitIP;
 
-        private readonly List<TextBox> _segments = new List<TextBox>();
+        private List<TextBox> _segments = new List<TextBox>();
 
         private bool _suppressAddressUpdate = false;
+
 
         public IPInput()
         {
@@ -29,6 +31,14 @@ namespace LogFileToDB
             _segments.Add(SecondSegment);
             _segments.Add(ThirdSegment);
             _segments.Add(LastSegment);
+        }
+
+        public void Clear()
+        {
+            foreach (TextBox segment in _segments)
+            {
+                segment.Clear();
+            }
         }
 
         public static readonly DependencyProperty AddressProperty = DependencyProperty.Register(
@@ -99,27 +109,27 @@ namespace LogFileToDB
         {
             if (DigitKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelDigitKeyPress();
-                HandleDigitPress();
+                e.Handled = ShouldCancelDigitKeyPress(sender as TextBox);
+                HandleDigitPress(sender as TextBox);
             }
             else if (MoveBackwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelBackwardKeyPress();
-                HandleBackwardKeyPress();
+                e.Handled = ShouldCancelBackwardKeyPress(sender as TextBox);
+                HandleBackwardKeyPress(sender as TextBox);
             }
             else if (MoveForwardKeys.Contains(e.Key))
             {
-                e.Handled = ShouldCancelForwardKeyPress();
-                HandleForwardKeyPress();
+                e.Handled = ShouldCancelForwardKeyPress(sender as TextBox);
+                HandleForwardKeyPress(sender as TextBox);
             }
             else if (e.Key == Key.Back)
             {
-                HandleBackspaceKeyPress();
+                HandleBackspaceKeyPress(sender as TextBox);
             }
             else if (e.Key == Key.OemPeriod)
             {
                 e.Handled = true;
-                HandlePeriodKeyPress();
+                HandlePeriodKeyPress(sender as TextBox);
             }
             else
             {
@@ -136,9 +146,9 @@ namespace LogFileToDB
                    OtherAllowedKeys.Contains(e.Key);
         }
 
-        private void HandleDigitPress()
+        private void HandleDigitPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.Text.Length == 3 &&
                 currentTextBox.CaretIndex == 3 && currentTextBox.SelectedText.Length == 0)
@@ -147,9 +157,9 @@ namespace LogFileToDB
             }
         }
 
-        private bool ShouldCancelDigitKeyPress()
+        private bool ShouldCancelDigitKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
             return currentTextBox != null &&
                    currentTextBox.Text.Length == 3 &&
                    currentTextBox.CaretIndex == 3 &&
@@ -171,15 +181,15 @@ namespace LogFileToDB
             }
         }
 
-        private bool ShouldCancelBackwardKeyPress()
+        private bool ShouldCancelBackwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
             return currentTextBox != null && currentTextBox.CaretIndex == 0;
         }
 
-        private void HandleBackspaceKeyPress()
+        private void HandleBackspaceKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == 0 && currentTextBox.SelectedText.Length == 0)
             {
@@ -187,9 +197,9 @@ namespace LogFileToDB
             }
         }
 
-        private void HandleBackwardKeyPress()
+        private void HandleBackwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == 0)
             {
@@ -197,15 +207,15 @@ namespace LogFileToDB
             }
         }
 
-        private bool ShouldCancelForwardKeyPress()
+        private bool ShouldCancelForwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
             return currentTextBox != null && currentTextBox.CaretIndex == 3;
         }
 
-        private void HandleForwardKeyPress()
+        private void HandleForwardKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
@@ -213,9 +223,9 @@ namespace LogFileToDB
             }
         }
 
-        private void HandlePeriodKeyPress()
+        private void HandlePeriodKeyPress(TextBox sender)
         {
-            var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
+            var currentTextBox = sender;
 
             if (currentTextBox != null && currentTextBox.Text.Length > 0 && currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {

@@ -106,6 +106,7 @@ namespace Core
                 var filters = AddFiltersAsync(filter, cmd.Parameters).ToList();
                 if (filters.Any())
                 {
+                    query += " WHERE ";
                     query += string.Join(" AND ", filters);
                 }
                 if (filter.OrderBy != null)
