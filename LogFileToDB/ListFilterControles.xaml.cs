@@ -39,7 +39,10 @@ namespace LogFileToDB
 
         private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            logEntries.StatusCode = int.Parse(StatusPicker.SelectedItem as String);
+            if(!string.IsNullOrWhiteSpace(StatusPicker.SelectedItem as String))
+            {
+                logEntries.StatusCode = int.Parse(StatusPicker.SelectedItem as String);
+            }
         }
 
         private void Search(object sender, RoutedEventArgs e)

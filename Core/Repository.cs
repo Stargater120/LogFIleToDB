@@ -264,6 +264,29 @@ namespace Core
             }
         }
 
+        protected async Task<LogFile> GetLogFile(string query)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+            using var cmd = connection.CreateCommand();
+            cmd.CommandText = query;
+            using var reader = await cmd.ExecuteReaderAsync();
+            try
+            {
+                await reader.ReadAsync();
+                return new LogFile
+                {
+                    FileName = reader.GetString(1),
+                    LoadenOn = reader.GetDateTime(2),
+                    Entries = reader.GetInt32(3)
+                };
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
         private static async Task<string> GetOrderProperty(OrderingProperties property)
         {
             string orderBy;
