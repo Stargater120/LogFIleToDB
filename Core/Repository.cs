@@ -305,9 +305,9 @@ namespace Core
         {
             if (filter.TimeRange != null)
             {
-                parameters.AddWithValue("begin", filter.TimeRange.Begin);
-                parameters.AddWithValue("end", filter.TimeRange.End);
-                yield return " strftime('%s', date) BETWEEN strftime('%s', @begin) AND strftime('%s' @end) ";
+                parameters.AddWithValue("begin", filter.TimeRange.Begin.ToString("yyyy-MM-dd HH:mm:ss"));
+                parameters.AddWithValue("end", filter.TimeRange.End.ToString("yyyy-MM-dd HH:mm:ss"));
+                yield return " time_stamp <= @end AND time_stamp >= @begin ";
             }
 
             if (!string.IsNullOrWhiteSpace(filter.IPAdresses))
