@@ -10,9 +10,9 @@
     <Grid>
         <!--Date Picker-->
         <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
-        <control:DateTimeInput x:Name="StartInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0"/>
+        <control:DateTimeInput x:Name="StartInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" EmitDateTime="StartInput_EmitDateTime"/>
         <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
-        <control:DateTimeInput x:Name="EndInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0"/>
+        <control:DateTimeInput x:Name="EndInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0" EmitDateTime="EndInput_EmitDateTime"/>
 
         <!--ip filter-->
         <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="390,0,0,0" VerticalAlignment="Center"/>

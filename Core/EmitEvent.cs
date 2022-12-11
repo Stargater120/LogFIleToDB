@@ -14,4 +14,9 @@ namespace Core
             logEntries = new LogEntriesFilter();
         }
     }
+
+    public class EmitDateTime : EventArgs
+    {
+        public DateTime selectedTime { get; set; }
+    }
 }

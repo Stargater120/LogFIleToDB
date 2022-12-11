@@ -74,5 +74,23 @@ namespace LogFileToDB
                 logEntries.IPAdresses = e.IPAddress;
             }
         }
+
+        private void StartInput_EmitDateTime(object sender, EmitDateTime e)
+        {
+            if(logEntries.TimeRange is null)
+            {
+                logEntries.TimeRange = new TimeRange();
+            }
+            logEntries.TimeRange.Begin = e.selectedTime;
+        }
+
+        private void EndInput_EmitDateTime(object sender, EmitDateTime e)
+        {
+            if (logEntries.TimeRange is null)
+            {
+                logEntries.TimeRange = new TimeRange();
+            }
+            logEntries.TimeRange.End = e.selectedTime;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Core;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +16,7 @@ namespace LogFileToDB
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
-
+        public event EventHandler<EmitDateTime> EmitDateTime;
         private readonly List<TextBox> _segments = new List<TextBox>();
 
         private bool _suppressDateTimeUpdate = false;
@@ -48,7 +50,7 @@ namespace LogFileToDB
         {
             var dtTextBox = dependencyObject as DateTimeInput;
             var text = e.NewValue as string;
-            char[] chars = { '.', ':' };
+            char[] chars = { '.', ':', ','};
 
             if (text != null && dtTextBox != null)
             {
@@ -61,6 +63,37 @@ namespace LogFileToDB
                 }
                 dtTextBox._suppressDateTimeUpdate = false;
             }
+
+            if (dtTextBox.CheckSegments())
+            {
+                dtTextBox.EmitEvent(dtTextBox);
+            }
+        }
+
+        private bool CheckSegments()
+        {
+            if (_segments == null) return false;
+            foreach (var segment in _segments)
+            {
+                if(segment.Text.Length < 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void EmitEvent(DateTimeInput dtTextBox)
+        {
+            string dateTimeString = "";
+            foreach (var segment in _segments)
+            {
+                dateTimeString += segment.Text as String;
+            }
+            var dateTime = System.DateTime.Parse(dtTextBox.DateTime);
+            var dateTimeEvent = new EmitDateTime() { selectedTime = dateTime};
+            EmitDateTime(this, dateTimeEvent);
         }
 
         public string DateTime
@@ -158,7 +191,7 @@ namespace LogFileToDB
         {
             if (!_suppressDateTimeUpdate)
             {
-                DateTime = string.Format("{0}.{1}.{2} {3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text, YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
+                DateTime = string.Format("{0}.{1}.{2},{3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text, YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
             }
 
             var currentTextBox = sender as TextBox;
