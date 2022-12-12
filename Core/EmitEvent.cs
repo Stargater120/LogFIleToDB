@@ -18,5 +18,6 @@ namespace Core
     public class EmitDateTime : EventArgs
     {
         public DateTime selectedTime { get; set; }
+        public bool invalidDate { get; set; }
     }
 }

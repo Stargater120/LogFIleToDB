@@ -52,47 +52,63 @@ namespace LogFileToDB
 
         private void StartInput_EmitDateTime(object sender, EmitDateTime e)
         {
-            logEntries.Begin = e.selectedTime;
-            Filter_Button.IsEnabled = true;
-            if (logEntries.End.HasValue)
+            if (e.invalidDate)
             {
-                if (logEntries.End <= logEntries.Begin)
+                Filter_Button.IsEnabled = false;
+                MessageBox.Show("Der Startzeitpunkt enthält invalide Daten.", "Ok.");
+            }
+            else
+            {
+                logEntries.Begin = e.selectedTime;
+                Filter_Button.IsEnabled = true;
+                if (logEntries.End.HasValue)
                 {
-                    MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                    if (logEntries.End <= logEntries.Begin)
+                    {
+                        MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                        Filter_Button.IsEnabled = false;
+                    }
+                }
+
+                if (e.selectedTime >= DisplayedLists.rangeForAnalysis.End)
+                {
+                    MessageBox.Show(
+                        $"Mit diesem Anfangszeitpunkt wirst du keine Daten finden, der späteste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.End.ToLongTimeString()}",
+                        "Ok"
+                    );
                     Filter_Button.IsEnabled = false;
                 }
-            }
-
-            if (e.selectedTime >= DisplayedLists.rangeForAnalysis.End)
-            {
-                MessageBox.Show(
-                    $"Mit diesem Anfangszeitpunkt wirst du keine Daten finden, der späteste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.End.ToLongTimeString()}",
-                    "Ok"
-                );
-                Filter_Button.IsEnabled = false;
             }
         }
 
         private void EndInput_EmitDateTime(object sender, EmitDateTime e)
         {
-            logEntries.End = e.selectedTime;
-            Filter_Button.IsEnabled = true;
-            if (logEntries.Begin.HasValue)
+            if (e.invalidDate)
             {
-                if (logEntries.End <= logEntries.Begin)
+                Filter_Button.IsEnabled = false;
+                MessageBox.Show("Der Startzeitpunkt enthält invalide Daten.", "Ok.");
+            }
+            else
+            {
+                logEntries.End = e.selectedTime;
+                Filter_Button.IsEnabled = true;
+                if (logEntries.Begin.HasValue)
                 {
-                    MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                    if (logEntries.End <= logEntries.Begin)
+                    {
+                        MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                        Filter_Button.IsEnabled = false;
+                    }
+                }
+
+                if (e.selectedTime <= DisplayedLists.rangeForAnalysis.Begin)
+                {
+                    MessageBox.Show(
+                        $"Mit diesem Endzeitpunkt wirst du keine Daten finden, der früheste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.Begin.ToLongTimeString()}",
+                        "Ok."
+                    );
                     Filter_Button.IsEnabled = false;
                 }
-            }
-
-            if (e.selectedTime <= DisplayedLists.rangeForAnalysis.Begin)
-            {
-                MessageBox.Show(
-                    $"Mit diesem Endzeitpunkt wirst du keine Daten finden, der früheste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.Begin.ToLongTimeString()}",
-                    "Ok."
-                );
-                Filter_Button.IsEnabled = false;
             }
         }
 

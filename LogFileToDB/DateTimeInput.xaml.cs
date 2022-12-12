@@ -99,12 +99,21 @@ namespace LogFileToDB
                 dateTimeString += segment.Text as String;
             }
 
-            var dateTime = System.DateTime.Parse(dtTextBox.DateTime);
-            var dateTimeEvent = new EmitDateTime() { selectedTime = dateTime };
-            EmitDateTime(this, dateTimeEvent);
+            if (DateTime.TryParse(dtTextBox.DateTimeString, out DateTime dateTime))
+            {
+                var dateTimeEvent = new EmitDateTime() { selectedTime = dateTime };
+                dateTimeEvent.invalidDate = false;
+                EmitDateTime(this, dateTimeEvent);
+            }
+            else
+            {
+                var dtEvent = new EmitDateTime() { selectedTime = DateTime.Now };
+                dtEvent.invalidDate = true;
+                EmitDateTime(this, dtEvent);
+            }
         }
 
-        public string DateTime
+        public string DateTimeString
         {
             get { return (string)GetValue(DateTimeProperty); }
             set { SetValue(DateTimeProperty, value); }
@@ -202,7 +211,7 @@ namespace LogFileToDB
         {
             if (!_suppressDateTimeUpdate)
             {
-                DateTime = string.Format("{0}.{1}.{2},{3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text,
+                DateTimeString = string.Format("{0}.{1}.{2},{3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text,
                     YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
             }
 
