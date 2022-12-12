@@ -20,7 +20,7 @@ namespace LogFileToDB
             _queryRepository = queryRepository;
             //FillComboBoxes();
             InitializeComponent();
-            //InitializeLists();
+            InitializeLists();
             //_queryRepository.GetTimeRangeForFilterAsync();
         }
 
@@ -44,13 +44,15 @@ namespace LogFileToDB
         private async void InitializeLists()
         {
             DisplayedLists._logEntrys.Clear();
-            await _queryRepository.GetAllLogEntriesAsync();
-            await _queryRepository.GetAllAttributeValuesWithCountsAsync(new LogEntriesFilter());
-            requestsGrid.ItemsSource = DisplayedLists._logEntrys;
-            IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
-            Methoden_DataGrid.ItemsSource = DisplayedLists._methodenTabEntries;
-            Status_DataGrid.ItemsSource = DisplayedLists._statusTabEntries;
-            Files_DataGrid.ItemsSource = DisplayedLists._loadedFilesEntries;
+            try
+            {
+                await _queryRepository.GetAllLogEntriesAsync();
+                requestsGrid.ItemsSource = DisplayedLists._logEntrys;
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
@@ -70,7 +72,7 @@ namespace LogFileToDB
                 {
                     await _repository.CreateLogEntrys(filePath, fileName);
                     MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                     FillComboBoxes();
                     InitializeLists();
                     _queryRepository.GetTimeRangeForFilterAsync();
@@ -158,11 +160,22 @@ namespace LogFileToDB
                 return;
             }
 
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
-                               Core.Enums.OrderingProperties.IP, new LogEntriesFilter()))
+            try
             {
-                DisplayedLists._ipTabEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.IP, new LogEntriesFilter()))
+                {
+                    DisplayedLists._ipTabEntries.Add(entry);
+                }
+
+                IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Es gibt noch keine Daten, Bitte laden sie erst eine Passende Datei hoch", "Fehlende Daten",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private async void Methoden_Tab(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -171,12 +184,22 @@ namespace LogFileToDB
             {
                 return;
             }
-
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
-                               Core.Enums.OrderingProperties.Method, new LogEntriesFilter()))
+            try
             {
-                DisplayedLists._methodenTabEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.Method, new LogEntriesFilter()))
+                {
+                    DisplayedLists._methodenTabEntries.Add(entry);
+                }
+
+                Methoden_DataGrid.ItemsSource = DisplayedLists._methodenTabEntries;
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Es gibt noch keine Daten, Bitte laden sie erst eine Passende Datei hoch", "Fehlende Daten", MessageBoxButton.OK, MessageBoxImage.Error); ;
+            }
+            
         }
 
         private async void Status_TabItem_MouseLeftButtonDown(object sender,
@@ -187,13 +210,22 @@ namespace LogFileToDB
                 return;
             }
 
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
-                               Core.Enums.OrderingProperties.Code, new LogEntriesFilter()))
+            try
             {
-                DisplayedLists._statusTabEntries.Add(entry);
-            }
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.Code, new LogEntriesFilter()))
+                {
+                    DisplayedLists._statusTabEntries.Add(entry);
+                }
 
-            Status_DataGrid.ItemsSource = DisplayedLists._statusTabEntries;
+                Status_DataGrid.ItemsSource = DisplayedLists._statusTabEntries;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Es gibt noch keine Daten, Bitte laden sie erst eine Passende Datei hoch", "Fehlende Daten", MessageBoxButton.OK, MessageBoxImage.Error); ;
+            }
+            
         }
 
         private async void Files_TabItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -203,10 +235,20 @@ namespace LogFileToDB
                 return;
             }
 
-            await foreach (var entry in _queryRepository.GetAllPreviouslyLoadedFiles())
+            try
             {
-                DisplayedLists._loadedFilesEntries.Add(entry);
+                await foreach (var entry in _queryRepository.GetAllPreviouslyLoadedFiles())
+                {
+                    DisplayedLists._loadedFilesEntries.Add(entry);
+                }
+                Files_DataGrid.ItemsSource= DisplayedLists._loadedFilesEntries;
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Es gibt noch keine Daten, Bitte laden sie erst eine Passende Datei hoch", "Fehlende Daten", MessageBoxButton.OK, MessageBoxImage.Error); ;
+            }
+            
         }
     }
 }
