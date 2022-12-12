@@ -18,10 +18,10 @@ namespace LogFileToDB
         {
             _repository = repository;
             _queryRepository = queryRepository;
-            FillComboBoxes();
+            //FillComboBoxes();
             InitializeComponent();
-            InitializeLists();
-            _queryRepository.GetTimeRangeForFilterAsync();
+            //InitializeLists();
+            //_queryRepository.GetTimeRangeForFilterAsync();
         }
 
         private async void FillComboBoxes()
@@ -73,6 +73,7 @@ namespace LogFileToDB
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     FillComboBoxes();
                     InitializeLists();
+                    _queryRepository.GetTimeRangeForFilterAsync();
                 }
                 catch (Exception ex)
                 {
