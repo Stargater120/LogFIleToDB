@@ -9,12 +9,20 @@ namespace Core
     public class DisplayedLists
     {
         public static ObservableCollection<LogEntry> _logEntrys = new ObservableCollection<LogEntry>();
-        public static ObservableCollection<AttributeWithCount> _ipTabEntries = new ObservableCollection<AttributeWithCount>();
-        public static ObservableCollection<AttributeWithCount> _methodenTabEntries = new ObservableCollection<AttributeWithCount>();
-        public static ObservableCollection<AttributeWithCount> _statusTabEntries = new ObservableCollection<AttributeWithCount>();
+
+        public static ObservableCollection<AttributeWithCount> _ipTabEntries =
+            new ObservableCollection<AttributeWithCount>();
+
+        public static ObservableCollection<AttributeWithCount> _methodenTabEntries =
+            new ObservableCollection<AttributeWithCount>();
+
+        public static ObservableCollection<AttributeWithCount> _statusTabEntries =
+            new ObservableCollection<AttributeWithCount>();
+
         public static ObservableCollection<LogFile> _loadedFilesEntries = new ObservableCollection<LogFile>();
         public static ObservableCollection<string> _methodEntries = new ObservableCollection<string>();
         public static ObservableCollection<string> _statusEntries = new ObservableCollection<string>();
+        public static TimeRange rangeForAnalysis;
 
         public static void Clear(string listName)
         {

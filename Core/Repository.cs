@@ -91,11 +91,12 @@ namespace Core
                     };
                     return entry;
                 }
+
                 throw new Exception("Kein Eintrag gefunden");
             }
         }
 
-        #nullable enable
+#nullable enable
         protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(LogEntriesFilter? filter, string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
@@ -109,10 +110,12 @@ namespace Core
                     query += " WHERE ";
                     query += string.Join(" AND ", filters);
                 }
+
                 if (filter.OrderBy != null)
                 {
                     query += await GetOrderProperty(filter.OrderBy.Value);
                 }
+
                 if (filter.Order != null)
                 {
                     query += GetOrder(filter.Order.Value);
@@ -147,15 +150,16 @@ namespace Core
 
         protected async Task<long> GetCountAsync(string query)
         {
-            #nullable enable
+#nullable enable
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
             cmd.CommandText = query;
             object? result = cmd.ExecuteScalarAsync();
             return (long)result;
-        }  
-        
-        protected async IAsyncEnumerable<AttributeWithCount> GetAttributeWithCount(string query, string columnName, LogEntriesFilter? filter)
+        }
+
+        protected async IAsyncEnumerable<AttributeWithCount> GetAttributeWithCount(string query, string columnName,
+            LogEntriesFilter? filter)
         {
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
@@ -167,13 +171,15 @@ namespace Core
                 {
                     query += " HAVING ";
                     query += string.Join(" AND ", filters);
-                }               
+                }
+
                 if (filter.Order != null)
                 {
                     query += " ORDER BY count ";
                     query += GetOrder(filter.Order.Value);
                 }
-            } else
+            }
+            else
             {
                 query += " ORDER BY count ASC ";
             }
@@ -181,11 +187,14 @@ namespace Core
             cmd.CommandText = query;
 
             using var reader = cmd.ExecuteReader();
-            
+
             while (await reader.ReadAsync())
             {
-                var attributeWithCount = new AttributeWithCount() { 
-                    AttributeValue = columnName != "status_code" ? _sqlHelper.GetStringNullable(reader, 0) : reader.GetInt32(0).ToString(),
+                var attributeWithCount = new AttributeWithCount()
+                {
+                    AttributeValue = columnName != "status_code"
+                        ? _sqlHelper.GetStringNullable(reader, 0)
+                        : reader.GetInt32(0).ToString(),
                     AttributeCount = reader.GetInt32(1)
                 };
                 yield return attributeWithCount;
@@ -193,7 +202,8 @@ namespace Core
         }
 
         #region values for filter
-        #nullable enable
+
+#nullable enable
         protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
@@ -209,7 +219,7 @@ namespace Core
                 yield return _sqlHelper.GetStringNullable(reader, 0);
             }
         }
-        #nullable disable
+#nullable disable
 
         protected async Task<TimeRange> GetLimitsforDateTimePicker(string query)
         {
@@ -221,15 +231,20 @@ namespace Core
             using var reader = await cmd.ExecuteReaderAsync();
             if (reader.HasRows)
             {
-                var timeRange = new TimeRange()
+                while (await reader.ReadAsync())
                 {
-                    Begin = reader.GetDateTime(0),
-                    End = reader.GetDateTime(1)
-                };
-                return timeRange;
+                    var timeRange = new TimeRange()
+                    {
+                        Begin = reader.GetDateTime(0),
+                        End = reader.GetDateTime(1)
+                    };
+                    return timeRange;
+                }
             }
+
             throw new Exception("Keine Einträge gefunden");
         }
+
         #endregion
 
         protected async IAsyncEnumerable<LogFile> GetAllFilesAsync(string query)
@@ -271,7 +286,6 @@ namespace Core
             }
             catch (Exception)
             {
-
                 return null;
             }
         }
@@ -293,6 +307,7 @@ namespace Core
                     orderBy = " ORDER BY time_stamp ";
                     break;
             }
+
             return orderBy;
         }
 
@@ -301,13 +316,19 @@ namespace Core
             return order == Order.Descending ? " DESC" : " ASC";
         }
 
-        private static IEnumerable<string> AddFiltersAsync(LogEntriesFilter filter, SqliteParameterCollection parameters)
+        private static IEnumerable<string> AddFiltersAsync(LogEntriesFilter filter,
+            SqliteParameterCollection parameters)
         {
-            if (filter.TimeRange != null)
+            if (filter.Begin.HasValue)
             {
-                parameters.AddWithValue("begin", filter.TimeRange.Begin.ToString("yyyy-MM-dd HH:mm:ss"));
-                parameters.AddWithValue("end", filter.TimeRange.End.ToString("yyyy-MM-dd HH:mm:ss"));
-                yield return " time_stamp <= @end AND time_stamp >= @begin ";
+                parameters.AddWithValue("begin", filter.Begin.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                yield return " time_stamp >= @begin ";
+            }
+
+            if (filter.End.HasValue)
+            {
+                parameters.AddWithValue("end", filter.End.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                yield return " time_stamp <= @end ";
             }
 
             if (!string.IsNullOrWhiteSpace(filter.IPAdresses))

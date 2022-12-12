@@ -6,13 +6,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LogFileToDB
 {
@@ -24,13 +17,16 @@ namespace LogFileToDB
         public event EventHandler<EmitEvent> FilterSelected;
         public LogEntriesFilter logEntries;
         private bool supressFilterUpdate;
+        public bool DisableFilterButton { get; set; }
+
         public ListFilterControles()
         {
             InitializeComponent();
+            DisableFilterButton = false;
+            DataContext = this;
             logEntries = new LogEntriesFilter();
             MethodePicker.ItemsSource = DisplayedLists._methodEntries;
             StatusPicker.ItemsSource = DisplayedLists._statusEntries;
-
         }
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,9 +36,59 @@ namespace LogFileToDB
 
         private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(!string.IsNullOrWhiteSpace(StatusPicker.SelectedItem as String))
+            if (!string.IsNullOrWhiteSpace(StatusPicker.SelectedItem as String))
             {
                 logEntries.StatusCode = int.Parse(StatusPicker.SelectedItem as String);
+            }
+        }
+
+        private void IPInput_EmitIP(object sender, EmitEvent e)
+        {
+            if (!supressFilterUpdate)
+            {
+                logEntries.IPAdresses = e.IPAddress;
+            }
+        }
+
+        private void StartInput_EmitDateTime(object sender, EmitDateTime e)
+        {
+            logEntries.Begin = e.selectedTime;
+            if (logEntries.End.HasValue)
+            {
+                if (logEntries.End <= logEntries.Begin)
+                {
+                    DisableFilterButton = true;
+                    MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                }
+            }
+
+            if (e.selectedTime >= DisplayedLists.rangeForAnalysis.End)
+            {
+                DisableFilterButton = true;
+                MessageBox.Show(
+                    "Mit diesem Anfangszeitpunkt wirst du keine Daten finden, der späteste in der Datenbank vorhandene Zeitpunkt ist: {0}",
+                    DisplayedLists.rangeForAnalysis.End.ToLongTimeString());
+            }
+        }
+
+        private void EndInput_EmitDateTime(object sender, EmitDateTime e)
+        {
+            logEntries.End = e.selectedTime;
+            if (logEntries.Begin.HasValue)
+            {
+                if (logEntries.End <= logEntries.Begin)
+                {
+                    DisableFilterButton = true;
+                    MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                }
+            }
+
+            if (e.selectedTime <= DisplayedLists.rangeForAnalysis.Begin)
+            {
+                DisableFilterButton = true;
+                MessageBox.Show(
+                    "Mit diesem Endzeitpunkt wirst du keine Daten finden, der früheste in der Datenbank vorhandene Zeitpunkt ist: {0}",
+                    DisplayedLists.rangeForAnalysis.Begin.ToLongTimeString());
             }
         }
 
@@ -59,38 +105,11 @@ namespace LogFileToDB
             IpInput.Clear();
             StartInput.Clear();
             EndInput.Clear();
-            supressFilterUpdate= false;
+            supressFilterUpdate = false;
             LogEntriesFilter emptyFilter = new LogEntriesFilter();
             var emit = new EmitEvent();
             emit.logEntries = emptyFilter;
             FilterSelected(this, emit);
-            
-        }
-
-        private void IPInput_EmitIP(object sender, EmitEvent e)
-        {
-            if (!supressFilterUpdate)
-            {
-                logEntries.IPAdresses = e.IPAddress;
-            }
-        }
-
-        private void StartInput_EmitDateTime(object sender, EmitDateTime e)
-        {
-            if(logEntries.TimeRange is null)
-            {
-                logEntries.TimeRange = new TimeRange();
-            }
-            logEntries.TimeRange.Begin = e.selectedTime;
-        }
-
-        private void EndInput_EmitDateTime(object sender, EmitDateTime e)
-        {
-            if (logEntries.TimeRange is null)
-            {
-                logEntries.TimeRange = new TimeRange();
-            }
-            logEntries.TimeRange.End = e.selectedTime;
         }
     }
 }

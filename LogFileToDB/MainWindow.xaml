@@ -67,29 +67,29 @@
                         <TextBlock Text="Protokollliste" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+
                 <Grid Background="#2d3436" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="65"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
-                    <controls:ListFilterControles x:Name="ProtokolFilters" FilterSelected="ProtokolFilters_FilterSelected"/>
+                    <controls:ListFilterControles Grid.Row="0" x:Name="ProtokolFilters" FilterSelected="ProtokolFilters_FilterSelected" Margin="0,0,52,0"/>
                     <!--open File Btn-->
-                    <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="27" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
-                       
+                    <Button Grid.Row="0" ToolTip="Logfile hochladen und Daten speichern." Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="24" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1128,0,0,0" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
+                        <Image Height="17" Source="/ressources/upload_file_FILL0_wght400_GRAD0_opsz48.png" Stretch="Fill" Width="15"/>
                     </Button>
                     <!--Logs table-->
-                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" Grid.Row="2" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" CanUserAddRows="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -131,7 +131,7 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles x:Name="IPFilters" FilterSelected="IPFilters_FilterSelected"/>
                     <!--Logs IP Table-->
-                    <DataGrid x:Name="IP_Datagrid" CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="IP_Datagrid" CanUserReorderColumns="False" CanUserAddRows="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -146,7 +146,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Methoden Page-->
             <TabItem MouseLeftButtonDown="Methoden_Tab">
                 <TabItem.Header>
@@ -166,7 +166,7 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles x:Name="MethodFilters" FilterSelected="MethodFilters_FilterSelected"/>
                     <!--Logs Methods Table-->
-                    <DataGrid x:Name="Methoden_DataGrid" CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="Methoden_DataGrid" CanUserReorderColumns="False" CanUserAddRows="False"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -181,7 +181,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Status Page-->
             <TabItem MouseLeftButtonDown="Status_TabItem_MouseLeftButtonDown">
                 <TabItem.Header>
@@ -201,7 +201,7 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles x:Name="StatusFilter" FilterSelected="StatusFilter_FilterSelected"/>
                     <!--Logs Methode Table-->
-                    <DataGrid x:Name="Status_DataGrid" CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="Status_DataGrid" CanUserReorderColumns="False" CanUserAddRows="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -216,7 +216,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Geladene Dateien Page-->
             <TabItem MouseLeftButtonDown="Files_TabItem_MouseLeftButtonDown">
                 <TabItem.Resources>
@@ -232,7 +232,7 @@
                 </TabItem.Header>
                 <Grid Background="#2d3436">
                     <!--Table With uploaded Files-->
-                    <DataGrid x:Name="Files_DataGrid" CanUserReorderColumns="False" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                    <DataGrid x:Name="Files_DataGrid" CanUserReorderColumns="False"  CanUserAddRows="False"  Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>

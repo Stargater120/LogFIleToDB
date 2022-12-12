@@ -2,6 +2,7 @@
 using Core.Models;
 using Microsoft.Win32;
 using System;
+using System.Threading;
 using System.Windows;
 
 namespace LogFileToDB
@@ -13,6 +14,7 @@ namespace LogFileToDB
     {
         private readonly CommandRepository _repository;
         public readonly QueryRepository _queryRepository;
+
         public MainWindow(CommandRepository repository, QueryRepository queryRepository)
         {
             _repository = repository;
@@ -20,6 +22,7 @@ namespace LogFileToDB
             FillComboBoxes();
             InitializeComponent();
             InitializeLists();
+            _queryRepository.GetTimeRangeForFilterAsync();
         }
 
         private async void FillComboBoxes()
@@ -32,6 +35,7 @@ namespace LogFileToDB
             {
                 DisplayedLists._methodEntries.Add(entry);
             }
+
             await foreach (var entry in _queryRepository.GetOptionsForFilter(Core.Enums.OrderingProperties.Code))
             {
                 DisplayedLists._statusEntries.Add(entry);
@@ -42,7 +46,12 @@ namespace LogFileToDB
         {
             DisplayedLists._logEntrys.Clear();
             await _queryRepository.GetAllLogEntriesAsync();
+            await _queryRepository.GetAllAttributeValuesWithCountsAsync(new LogEntriesFilter());
             requestsGrid.ItemsSource = DisplayedLists._logEntrys;
+            IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
+            Methoden_DataGrid.ItemsSource = DisplayedLists._methodenTabEntries;
+            Status_DataGrid.ItemsSource = DisplayedLists._statusTabEntries;
+            Files_DataGrid.ItemsSource = DisplayedLists._loadedFilesEntries;
         }
 
         private async void AddDataThroughFile(object sender, RoutedEventArgs e)
@@ -61,11 +70,12 @@ namespace LogFileToDB
                 try
                 {
                     await _repository.CreateLogEntrys(filePath, fileName);
-                    MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Die Daten wurden erfolgreich hinzugefügt.", "Daten hinzufügen",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                     FillComboBoxes();
                     InitializeLists();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Daten hinzufügen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -93,14 +103,17 @@ namespace LogFileToDB
             DisplayedLists.Clear("IPEntries");
             try
             {
-                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, e.logEntries))
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                                   Core.Enums.OrderingProperties.IP, e.logEntries))
                 {
                     DisplayedLists._ipTabEntries.Add(entry);
                 }
-            } catch
+            }
+            catch
             {
                 MessageBox.Show("Für diese Filter gibt es keine Ergebnisse");
             }
+
             IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
         }
 
@@ -109,11 +122,12 @@ namespace LogFileToDB
             DisplayedLists.Clear("MethodEntries");
             try
             {
-                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, e.logEntries))
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                                   Core.Enums.OrderingProperties.Method, e.logEntries))
                 {
                     DisplayedLists._methodenTabEntries.Add(entry);
                 }
-            } 
+            }
             catch
             {
                 MessageBox.Show("Für diesen Filter gibt es keine Ergebnisse", "Ok");
@@ -125,7 +139,8 @@ namespace LogFileToDB
             DisplayedLists.Clear("StatusEntries");
             try
             {
-                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, e.logEntries))
+                await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                                   Core.Enums.OrderingProperties.Code, e.logEntries))
                 {
                     DisplayedLists._statusTabEntries.Add(entry);
                 }
@@ -138,39 +153,42 @@ namespace LogFileToDB
 
         private async void IP_StackPanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(DisplayedLists._ipTabEntries.Count > 0)
+            if (DisplayedLists._ipTabEntries.Count > 0)
             {
                 return;
             }
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.IP, new LogEntriesFilter()))
+
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.IP, new LogEntriesFilter()))
             {
                 DisplayedLists._ipTabEntries.Add(entry);
             }
-
-            IP_Datagrid.ItemsSource = DisplayedLists._ipTabEntries;
         }
 
         private async void Methoden_Tab(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(DisplayedLists._methodenTabEntries.Count > 0)
+            if (DisplayedLists._methodenTabEntries.Count > 0)
             {
                 return;
             }
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Method, new LogEntriesFilter()))
+
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.Method, new LogEntriesFilter()))
             {
                 DisplayedLists._methodenTabEntries.Add(entry);
             }
-
-            Methoden_DataGrid.ItemsSource = DisplayedLists._methodenTabEntries;
         }
 
-        private async void Status_TabItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void Status_TabItem_MouseLeftButtonDown(object sender,
+            System.Windows.Input.MouseButtonEventArgs e)
         {
             if (DisplayedLists._statusTabEntries.Count > 0)
             {
                 return;
             }
-            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(Core.Enums.OrderingProperties.Code, new LogEntriesFilter()))
+
+            await foreach (var entry in _queryRepository.GetAttributeValueWithCountAsync(
+                               Core.Enums.OrderingProperties.Code, new LogEntriesFilter()))
             {
                 DisplayedLists._statusTabEntries.Add(entry);
             }
@@ -180,40 +198,15 @@ namespace LogFileToDB
 
         private async void Files_TabItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if(DisplayedLists._loadedFilesEntries.Count > 0)
+            if (DisplayedLists._loadedFilesEntries.Count > 0)
             {
                 return;
             }
+
             await foreach (var entry in _queryRepository.GetAllPreviouslyLoadedFiles())
             {
                 DisplayedLists._loadedFilesEntries.Add(entry);
             }
-
-            Files_DataGrid.ItemsSource= DisplayedLists._loadedFilesEntries;
         }
-
-
-        //private void ListFilterControles_FilterSelected(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    var text = e.NewValue as String;
-        //}
-
-        //private async void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    await _queryRepository.GetAllLogEntriesAsync();
-        //    Tester_Liste.ItemsSource = _displayedLists.LogEntrys;
-        //}
-
-        //private void Button_Click1(object sender, RoutedEventArgs e)
-        //{
-        //    var templist = _displayedLists.LogEntrys.Skip(15).ToList();
-        //    //var temp2 = templist.Skip(15).ToList();
-        //    _displayedLists.Clear("LogEntry");
-
-        //    foreach (var entry in templist)
-        //    {
-        //        _displayedLists.LogEntrys.Add(entry);
-        //    }
-        //}
     }
 }

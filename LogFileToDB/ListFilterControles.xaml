@@ -6,21 +6,21 @@
              xmlns:local="clr-namespace:LogFileToDB"
              xmlns:control="clr-namespace:LogFileToDB"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="1200">
+             d:DesignHeight="150" Width="1109">
     <Grid>
         <!--Date Picker-->
-        <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
-        <control:DateTimeInput x:Name="StartInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" EmitDateTime="StartInput_EmitDateTime"/>
-        <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Center"/>
-        <control:DateTimeInput x:Name="EndInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="230,0,0,0" EmitDateTime="EndInput_EmitDateTime"/>
+        <Label Foreground="AliceBlue" Content="Von" HorizontalAlignment="Left" Margin="1,0,0,0" VerticalAlignment="Center"/>
+        <control:DateTimeInput x:Name="StartInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="37,0,0,0" EmitDateTime="StartInput_EmitDateTime"/>
+        <Label Foreground="AliceBlue" Content="Bis" HorizontalAlignment="Left" Margin="192,0,0,0" VerticalAlignment="Center"/>
+        <control:DateTimeInput x:Name="EndInput" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="222,0,0,0" EmitDateTime="EndInput_EmitDateTime"/>
 
         <!--ip filter-->
-        <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="390,0,0,0" VerticalAlignment="Center"/>
-        <control:IPInput x:Name="IpInput" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="420,0,0,0" EmitIP="IPInput_EmitIP"/>
+        <Label Foreground="AliceBlue" Content="IP-" HorizontalAlignment="Left" Margin="377,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.195,0.435"/>
+        <control:IPInput x:Name="IpInput" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="407,0,0,0" EmitIP="IPInput_EmitIP"/>
 
         <!--methode filter-->
-        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="580,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="650,0,0,0">
+        <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="562,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="630,0,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -30,8 +30,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <!--status filter-->
-        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="815,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="860,0,0,0">
+        <Label Foreground="AliceBlue" Content="Status-" HorizontalAlignment="Left" Margin="785,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="StatusPicker_SelectionChanged" x:Name="StatusPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="837,0,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -40,20 +40,20 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Click="Search" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Height="27" Margin="1030,0,0,0" Background="White" Cursor="Hand" Content="Filtern">
+        <Button ToolTip="Filter anwenden." Click="Search" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Margin="1002,0,0,0" Background="White" Cursor="Hand" Content="Filtern">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button ToolTip="Filter leeren und neu laden." Click="Clear_Search" Width="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="27" Margin="1120,0,0,0" Background="White" Cursor="Hand">
+        <Button ToolTip="Filter leeren und neu laden." Click="Clear_Search" Width="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Margin="1082,0,0,0" Background="White" Cursor="Hand">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
-            <Image Source="/ressources/refresh_FILL0_wght400_GRAD0_opsz48.png" Stretch="Fill"/>
+            <Image Source="/ressources/refresh_FILL0_wght400_GRAD0_opsz48.png" Stretch="Fill" RenderTransformOrigin="-0.271,0.662"/>
         </Button>
     </Grid>
 </UserControl>
