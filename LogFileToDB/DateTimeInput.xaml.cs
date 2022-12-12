@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Core;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,11 +12,16 @@ namespace LogFileToDB
     /// </summary>
     public partial class DateTimeInput : UserControl
     {
-        private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, Key.NumPad0, Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9 };
+        private static readonly List<Key> DigitKeys = new List<Key>
+        {
+            Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, Key.NumPad0, Key.NumPad1,
+            Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9
+        };
+
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
-
+        public event EventHandler<EmitDateTime> EmitDateTime;
         private readonly List<TextBox> _segments = new List<TextBox>();
 
         private bool _suppressDateTimeUpdate = false;
@@ -28,11 +35,19 @@ namespace LogFileToDB
             _segments.Add(HoursSegment);
             _segments.Add(MinutesSegment);
             _segments.Add(SecondsSegment);
+        }
 
+        public void Clear()
+        {
+            foreach (TextBox segment in _segments)
+            {
+                segment.Clear();
+            }
         }
 
         public static readonly DependencyProperty DateTimeProperty = DependencyProperty.Register(
-            "Address", typeof(string), typeof(DateTimeInput), new FrameworkPropertyMetadata(default(string), AddressChanged)
+            "Address", typeof(string), typeof(DateTimeInput),
+            new FrameworkPropertyMetadata(default(string), AddressChanged)
             {
                 BindsTwoWayByDefault = true
             });
@@ -41,7 +56,7 @@ namespace LogFileToDB
         {
             var dtTextBox = dependencyObject as DateTimeInput;
             var text = e.NewValue as string;
-            char[] chars = { '.', ':' };
+            char[] chars = { '.', ':', ',' };
 
             if (text != null && dtTextBox != null)
             {
@@ -52,11 +67,53 @@ namespace LogFileToDB
                     dtTextBox._segments[i].Text = segment;
                     i++;
                 }
+
                 dtTextBox._suppressDateTimeUpdate = false;
+            }
+
+            if (dtTextBox.CheckSegments())
+            {
+                dtTextBox.EmitEvent(dtTextBox);
             }
         }
 
-        public string DateTime
+        private bool CheckSegments()
+        {
+            if (_segments == null) return false;
+            foreach (var segment in _segments)
+            {
+                if (segment.Text.Length < 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void EmitEvent(DateTimeInput dtTextBox)
+        {
+            string dateTimeString = "";
+            foreach (var segment in _segments)
+            {
+                dateTimeString += segment.Text as String;
+            }
+
+            if (DateTime.TryParse(dtTextBox.DateTimeString, out DateTime dateTime))
+            {
+                var dateTimeEvent = new EmitDateTime() { selectedTime = dateTime };
+                dateTimeEvent.invalidDate = false;
+                EmitDateTime(this, dateTimeEvent);
+            }
+            else
+            {
+                var dtEvent = new EmitDateTime() { selectedTime = DateTime.Now };
+                dtEvent.invalidDate = true;
+                EmitDateTime(this, dtEvent);
+            }
+        }
+
+        public string DateTimeString
         {
             get { return (string)GetValue(DateTimeProperty); }
             set { SetValue(DateTimeProperty, value); }
@@ -118,6 +175,7 @@ namespace LogFileToDB
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
+
             if (currentTextBox != null && isYear && currentTextBox.Text.Length == 4 &&
                 currentTextBox.CaretIndex == 4 && currentTextBox.SelectedText.Length == 0)
             {
@@ -134,13 +192,15 @@ namespace LogFileToDB
             {
                 isYear = currentTextBox.Name == YearSegment.Name;
             }
+
             if (!isYear)
             {
                 return currentTextBox != null &&
-                   currentTextBox.Text.Length == 2 &&
-                   currentTextBox.CaretIndex == 2 &&
-                   currentTextBox.SelectedText.Length == 0;
+                       currentTextBox.Text.Length == 2 &&
+                       currentTextBox.CaretIndex == 2 &&
+                       currentTextBox.SelectedText.Length == 0;
             }
+
             return currentTextBox != null &&
                    currentTextBox.Text.Length == 4 &&
                    currentTextBox.CaretIndex == 4 &&
@@ -151,7 +211,8 @@ namespace LogFileToDB
         {
             if (!_suppressDateTimeUpdate)
             {
-                DateTime = string.Format("{0}.{1}.{2} {3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text, YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
+                DateTimeString = string.Format("{0}.{1}.{2},{3}:{4}:{5}", FirstSegment.Text, SecondSegment.Text,
+                    YearSegment.Text, HoursSegment.Text, MinutesSegment.Text, SecondsSegment.Text);
             }
 
             var currentTextBox = sender as TextBox;
@@ -166,6 +227,7 @@ namespace LogFileToDB
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
+
             if (currentTextBox != null && isYear && currentTextBox.Text.Length == 4 && currentTextBox.CaretIndex == 4)
             {
                 MoveFocusToNextSegment(currentTextBox);
@@ -209,7 +271,10 @@ namespace LogFileToDB
             }
 
             if (!isYear)
-            { return currentTextBox != null && currentTextBox.CaretIndex == 4; }
+            {
+                return currentTextBox != null && currentTextBox.CaretIndex == 4;
+            }
+
             return currentTextBox != null && currentTextBox.CaretIndex == 2;
         }
 
@@ -227,7 +292,8 @@ namespace LogFileToDB
         {
             var currentTextBox = sender;
 
-            if (currentTextBox != null && currentTextBox.Text.Length > 0 && currentTextBox.CaretIndex == currentTextBox.Text.Length)
+            if (currentTextBox != null && currentTextBox.Text.Length > 0 &&
+                currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
@@ -273,4 +339,3 @@ namespace LogFileToDB
         }
     }
 }
-

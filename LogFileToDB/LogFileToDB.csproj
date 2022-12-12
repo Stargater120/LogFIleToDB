@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DB.db" />
+    <None Remove="ressources\refresh_FILL0_wght400_GRAD0_opsz48.png" />
+    <None Remove="ressources\upload_file_FILL0_wght400_GRAD0_opsz48.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ressources\refresh_FILL0_wght400_GRAD0_opsz48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ressources\upload_file_FILL0_wght400_GRAD0_opsz48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.30" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.116" />
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />

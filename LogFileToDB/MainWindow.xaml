@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:LogFileToDB"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="LogFile Analyse"
         MinHeight="700"
         MinWidth="1250"
          Height="700"
@@ -67,29 +67,29 @@
                         <TextBlock Text="Protokollliste" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+
                 <Grid Background="#2d3436" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition Height="65"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
-                    <controls:ListFilterControles />
+                    <controls:ListFilterControles Grid.Row="0" x:Name="ProtokolFilters" FilterSelected="ProtokolFilters_FilterSelected" Margin="0,0,52,0"/>
                     <!--open File Btn-->
-                    <Button Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="185" Height="35" Content="Datei öffnen" HorizontalAlignment="left" VerticalAlignment="Bottom" Margin="10,0,10,10" Grid.Row="1" >
-                       
+                    <Button Grid.Row="0" ToolTip="Logfile hochladen und Daten speichern." Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="25" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1128,0,0,0" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="5"/>
                             </Style>
                         </Button.Resources>
+                        <Image Height="17" Source="/ressources/upload_file_FILL0_wght400_GRAD0_opsz48.png" Stretch="Fill" Width="15"/>
                     </Button>
                     <!--Logs table-->
-                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" Grid.Row="2" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="requestsGrid" CanUserReorderColumns="False" CanUserAddRows="False" HeadersVisibility="Column" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -97,17 +97,17 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
-                      Binding="{Binding Path=IPAddress}" Width="185" />
-                            <DataGridTextColumn Header="Datum"
-                      Binding="{Binding Path=TimeStamp}" Width="185" />
+                      Binding="{Binding Path=IPAddress}" Width="135" />
+                            <DataGridTextColumn Header="Zeitpunkt"
+                      Binding="{Binding Path=TimeStamp}" Width="165" />
                             <DataGridTextColumn Header="Methode"
-                      Binding="{Binding Path=Method}" Width="*" />
+                      Binding="{Binding Path=Method}" Width="80" />
                             <DataGridTextColumn Header="URL"
                       Binding="{Binding Path=URL}" Width="*" />
                             <DataGridTextColumn Header="Status"
-                      Binding="{Binding Path=StatusCode}" Width="*" />
+                      Binding="{Binding Path=StatusCode}" Width="80" />
                             <DataGridTextColumn Header="Ansprechzeit"
-                      Binding="{Binding Path=ResponseTime}" Width="*" />
+                      Binding="{Binding Path=ResponseTime}" Width="90" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -115,7 +115,7 @@
             <!--IP-Adressen Page-->
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="IP_StackPanel_MouseLeftButtonDown">
                         <Image Source="https://cdn-icons-png.flaticon.com/128/6802/6802090.png" Width="25" Height="25"  Margin="0,0,3,0" />
                         <TextBlock Text="IP-Adressen" VerticalAlignment="Center" />
                     </StackPanel>
@@ -129,9 +129,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="IPFilters" FilterSelected="IPFilters_FilterSelected"/>
                     <!--Logs IP Table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="IP_Datagrid" CanUserReorderColumns="False" CanUserAddRows="False" HeadersVisibility="Column"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -139,18 +139,18 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="IP-Adresse"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeValue}" Width="*" />
                             <DataGridTextColumn Header="Anzahl Requests"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeCount}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Methoden Page-->
-            <TabItem >
+            <TabItem MouseLeftButtonDown="Methoden_Tab">
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Methoden_Tab">
                         <Image Source="https://dt-cdn.net/hub/ETL_Service_icon.png" Width="24" Height="24" Margin="0,0,3,0" />
                         <TextBlock Text="Methoden" VerticalAlignment="Center" />
                     </StackPanel>
@@ -164,9 +164,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="MethodFilters" FilterSelected="MethodFilters_FilterSelected"/>
                     <!--Logs Methods Table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="Methoden_DataGrid" CanUserReorderColumns="False" CanUserAddRows="False"  HeadersVisibility="Column"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,10" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -174,18 +174,18 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Methoden"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeValue}" Width="*" />
                             <DataGridTextColumn Header="Anzahl Requests"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeCount}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Status Page-->
-            <TabItem >
+            <TabItem MouseLeftButtonDown="Status_TabItem_MouseLeftButtonDown">
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Status_TabItem_MouseLeftButtonDown">
                         <Image Source="https://cdn-icons-png.flaticon.com/512/4661/4661519.png" Width="25" Height="25"  Margin="0,0,3,0" />
                         <TextBlock Text="Status" VerticalAlignment="Center" />
                     </StackPanel>
@@ -199,9 +199,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--Filter Component-->
-                    <controls:ListFilterControles/>
+                    <controls:ListFilterControles x:Name="StatusFilter" FilterSelected="StatusFilter_FilterSelected"/>
                     <!--Logs Methode Table-->
-                    <DataGrid CanUserReorderColumns="False" Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid x:Name="Status_DataGrid" CanUserReorderColumns="False" CanUserAddRows="False" HeadersVisibility="Column"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -209,30 +209,30 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Status"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeValue}" Width="*" />
                             <DataGridTextColumn Header="Anzahl Requests"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=AttributeCount}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            
+
             <!--Geladene Dateien Page-->
-            <TabItem>
+            <TabItem MouseLeftButtonDown="Files_TabItem_MouseLeftButtonDown">
                 <TabItem.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0,5,0,0"/>
                     </Style>
                 </TabItem.Resources>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="Files_TabItem_MouseLeftButtonDown">
                         <Image Source="https://cdn-icons-png.flaticon.com/512/217/217861.png" Width="25" Height="25"  Margin="0,0,3,0" />
                         <TextBlock Text="Geladene Dateien anzeigen" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#2d3436">
                     <!--Table With uploaded Files-->
-                    <DataGrid CanUserReorderColumns="False" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                    <DataGrid x:Name="Files_DataGrid" CanUserReorderColumns="False"  CanUserAddRows="False"  HeadersVisibility="Column"  Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
@@ -240,11 +240,11 @@
                         </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Dateiname"
-                      Binding="{Binding }" Width="*" />
-                            <DataGridTextColumn Header="Aufgeladen auf"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=FileName}" Width="*" />
+                            <DataGridTextColumn Header="Geladen am"
+                      Binding="{Binding Path=LoadenOn}" Width="*" />
                             <DataGridTextColumn Header="Menge an Einträgen"
-                      Binding="{Binding }" Width="*" />
+                      Binding="{Binding Path=Entries}" Width="*" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

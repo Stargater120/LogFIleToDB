@@ -91,11 +91,12 @@ namespace Core
                     };
                     return entry;
                 }
+
                 throw new Exception("Kein Eintrag gefunden");
             }
         }
 
-        #nullable enable
+#nullable enable
         protected async IAsyncEnumerable<LogEntry> GetEntriesAsync(LogEntriesFilter? filter, string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
@@ -106,12 +107,15 @@ namespace Core
                 var filters = AddFiltersAsync(filter, cmd.Parameters).ToList();
                 if (filters.Any())
                 {
+                    query += " WHERE ";
                     query += string.Join(" AND ", filters);
                 }
+
                 if (filter.OrderBy != null)
                 {
                     query += await GetOrderProperty(filter.OrderBy.Value);
                 }
+
                 if (filter.Order != null)
                 {
                     query += GetOrder(filter.Order.Value);
@@ -146,15 +150,16 @@ namespace Core
 
         protected async Task<long> GetCountAsync(string query)
         {
-            #nullable enable
+#nullable enable
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
             cmd.CommandText = query;
             object? result = cmd.ExecuteScalarAsync();
             return (long)result;
-        }  
-        
-        protected async IAsyncEnumerable<AttributeWithCount> GetAttributeWithCount(string query, string columnName, LogEntriesFilter? filter)
+        }
+
+        protected async IAsyncEnumerable<AttributeWithCount> GetAttributeWithCount(string query, string columnName,
+            LogEntriesFilter? filter)
         {
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
@@ -166,25 +171,23 @@ namespace Core
                 {
                     query += " HAVING ";
                     query += string.Join(" AND ", filters);
-                }               
-                if (filter.Order != null)
-                {
-                    query += " ORDER BY count ";
-                    query += GetOrder(filter.Order.Value);
                 }
-            } else
-            {
-                query += " ORDER BY count ASC ";
             }
+
+            query += " ORDER BY count ASC ";
+
 
             cmd.CommandText = query;
 
             using var reader = cmd.ExecuteReader();
-            
+
             while (await reader.ReadAsync())
             {
-                var attributeWithCount = new AttributeWithCount() { 
-                    AttributeValue = columnName != "status_code" ? _sqlHelper.GetStringNullable(reader, 0) : reader.GetInt32(0).ToString(),
+                var attributeWithCount = new AttributeWithCount()
+                {
+                    AttributeValue = columnName != "status_code"
+                        ? _sqlHelper.GetStringNullable(reader, 0)
+                        : reader.GetInt32(0).ToString(),
                     AttributeCount = reader.GetInt32(1)
                 };
                 yield return attributeWithCount;
@@ -192,18 +195,13 @@ namespace Core
         }
 
         #region values for filter
-        #nullable enable
-        protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query, string? searchValue, int offset)
+
+#nullable enable
+        protected async IAsyncEnumerable<string> GetOptionsForMultiselectAsync(string query)
         {
             using var connection = _dBContext.GetOpenDBConnection();
             using var cmd = connection.CreateCommand();
 
-            if(!string.IsNullOrEmpty(searchValue))
-            {
-                cmd.Parameters.AddWithValue("searchValue", searchValue);
-            }
-
-            cmd.Parameters.AddWithValue("offset", offset);
 
             cmd.CommandText = query;
 
@@ -214,7 +212,7 @@ namespace Core
                 yield return _sqlHelper.GetStringNullable(reader, 0);
             }
         }
-        #nullable disable
+#nullable disable
 
         protected async Task<TimeRange> GetLimitsforDateTimePicker(string query)
         {
@@ -226,15 +224,20 @@ namespace Core
             using var reader = await cmd.ExecuteReaderAsync();
             if (reader.HasRows)
             {
-                var timeRange = new TimeRange()
+                while (await reader.ReadAsync())
                 {
-                    Begin = reader.GetDateTime(0),
-                    End = reader.GetDateTime(1)
-                };
-                return timeRange;
+                    var timeRange = new TimeRange()
+                    {
+                        Begin = reader.GetDateTime(0),
+                        End = reader.GetDateTime(1)
+                    };
+                    return timeRange;
+                }
             }
+
             throw new Exception("Keine Einträge gefunden");
         }
+
         #endregion
 
         protected async IAsyncEnumerable<LogFile> GetAllFilesAsync(string query)
@@ -258,6 +261,28 @@ namespace Core
             }
         }
 
+        protected async Task<LogFile> GetLogFile(string query)
+        {
+            using var connection = _dBContext.GetOpenDBConnection();
+            using var cmd = connection.CreateCommand();
+            cmd.CommandText = query;
+            using var reader = await cmd.ExecuteReaderAsync();
+            try
+            {
+                await reader.ReadAsync();
+                return new LogFile
+                {
+                    FileName = reader.GetString(1),
+                    LoadenOn = reader.GetDateTime(2),
+                    Entries = reader.GetInt32(3)
+                };
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         private static async Task<string> GetOrderProperty(OrderingProperties property)
         {
             string orderBy;
@@ -275,6 +300,7 @@ namespace Core
                     orderBy = " ORDER BY time_stamp ";
                     break;
             }
+
             return orderBy;
         }
 
@@ -283,43 +309,37 @@ namespace Core
             return order == Order.Descending ? " DESC" : " ASC";
         }
 
-        private static IEnumerable<string> AddFiltersAsync(LogEntriesFilter filter, SqliteParameterCollection parameters)
+        private static IEnumerable<string> AddFiltersAsync(LogEntriesFilter filter,
+            SqliteParameterCollection parameters)
         {
-            if (filter.TimeRange != null)
+            if (filter.Begin.HasValue)
             {
-                parameters.AddWithValue("begin", filter.TimeRange.Begin);
-                parameters.AddWithValue("end", filter.TimeRange.End);
-                yield return " TimeStamp >= @begin AND TimeStamp <= @end ";
+                parameters.AddWithValue("begin", filter.Begin.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                yield return " time_stamp >= @begin ";
             }
 
-            if (filter.IPAdresses?.Count > 0)
+            if (filter.End.HasValue)
             {
-                IEnumerable<string> ipAdresses = filter.IPAdresses.Select((ipAdress, i) =>
-                {
-                    parameters.AddWithValue($"ipAdress{i}", filter.IPAdresses[i]);
-                    return @$"@ipAdress{i}";
-                });
-                yield return $" ip_address IN ({string.Join(",", ipAdresses)})";
+                parameters.AddWithValue("end", filter.End.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                yield return " time_stamp <= @end ";
             }
 
-            if (filter.Methods?.Count > 0)
+            if (!string.IsNullOrWhiteSpace(filter.IPAdresses))
             {
-                IEnumerable<string> methods = filter.Methods.Select((method, i) =>
-                {
-                    parameters.AddWithValue($"method{i}", filter.Methods);
-                    return $@"@method{i}";
-                });
-                yield return $" method IN ({string.Join(",", methods)})";
+                parameters.AddWithValue($"ipAdress0", filter.IPAdresses);
+                yield return $" ip_address like (\"{filter.IPAdresses}\")";
             }
 
-            if (filter.StatusCodes?.Count > 0)
+            if (!string.IsNullOrWhiteSpace(filter.Method))
             {
-                IEnumerable<string> statusCodes = filter.StatusCodes.Select((statusCode, i) =>
-                {
-                    parameters.AddWithValue($"statusCode{i}", filter.StatusCodes[i]);
-                    return $@"@statusCode{i}";
-                });
-                yield return $" status_code IN ({string.Join(",", statusCodes)})";
+                parameters.AddWithValue($"method0", filter.Method);
+                yield return $" method like (\"{filter.Method}\")";
+            }
+
+            if (filter.StatusCode != null)
+            {
+                parameters.AddWithValue($"statusCode0", filter.StatusCode);
+                yield return $" status_code = {filter.StatusCode}";
             }
         }
     }
