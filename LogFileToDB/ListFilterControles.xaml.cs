@@ -1,9 +1,6 @@
 ﻿using Core;
 using Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,21 +14,22 @@ namespace LogFileToDB
         public event EventHandler<EmitEvent> FilterSelected;
         public LogEntriesFilter logEntries;
         private bool supressFilterUpdate;
-        public bool DisableFilterButton { get; set; }
 
         public ListFilterControles()
         {
             InitializeComponent();
-            DisableFilterButton = false;
             DataContext = this;
             logEntries = new LogEntriesFilter();
-            MethodePicker.ItemsSource = DisplayedLists._methodEntries;
+            MethodPicker.ItemsSource = DisplayedLists._methodEntries;
             StatusPicker.ItemsSource = DisplayedLists._statusEntries;
+            //Filter Button will stay disabled as long as there are no valid Inputs
+            Filter_Button.IsEnabled = false;
         }
 
         private void MethodePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            logEntries.Method = MethodePicker.SelectedItem as String;
+            logEntries.Method = MethodPicker.SelectedItem as String;
+            Filter_Button.IsEnabled = true;
         }
 
         private void StatusPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,6 +37,7 @@ namespace LogFileToDB
             if (!string.IsNullOrWhiteSpace(StatusPicker.SelectedItem as String))
             {
                 logEntries.StatusCode = int.Parse(StatusPicker.SelectedItem as String);
+                Filter_Button.IsEnabled = true;
             }
         }
 
@@ -47,48 +46,53 @@ namespace LogFileToDB
             if (!supressFilterUpdate)
             {
                 logEntries.IPAdresses = e.IPAddress;
+                Filter_Button.IsEnabled = true;
             }
         }
 
         private void StartInput_EmitDateTime(object sender, EmitDateTime e)
         {
             logEntries.Begin = e.selectedTime;
+            Filter_Button.IsEnabled = true;
             if (logEntries.End.HasValue)
             {
                 if (logEntries.End <= logEntries.Begin)
                 {
-                    DisableFilterButton = true;
                     MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                    Filter_Button.IsEnabled = false;
                 }
             }
 
             if (e.selectedTime >= DisplayedLists.rangeForAnalysis.End)
             {
-                DisableFilterButton = true;
                 MessageBox.Show(
-                    "Mit diesem Anfangszeitpunkt wirst du keine Daten finden, der späteste in der Datenbank vorhandene Zeitpunkt ist: {0}",
-                    DisplayedLists.rangeForAnalysis.End.ToLongTimeString());
+                    $"Mit diesem Anfangszeitpunkt wirst du keine Daten finden, der späteste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.End.ToLongTimeString()}",
+                    "Ok"
+                );
+                Filter_Button.IsEnabled = false;
             }
         }
 
         private void EndInput_EmitDateTime(object sender, EmitDateTime e)
         {
             logEntries.End = e.selectedTime;
+            Filter_Button.IsEnabled = true;
             if (logEntries.Begin.HasValue)
             {
                 if (logEntries.End <= logEntries.Begin)
                 {
-                    DisableFilterButton = true;
                     MessageBox.Show("Das Ende des Zeitraums muss nach dem Anfang sein.");
+                    Filter_Button.IsEnabled = false;
                 }
             }
 
             if (e.selectedTime <= DisplayedLists.rangeForAnalysis.Begin)
             {
-                DisableFilterButton = true;
                 MessageBox.Show(
-                    "Mit diesem Endzeitpunkt wirst du keine Daten finden, der früheste in der Datenbank vorhandene Zeitpunkt ist: {0}",
-                    DisplayedLists.rangeForAnalysis.Begin.ToLongTimeString());
+                    $"Mit diesem Endzeitpunkt wirst du keine Daten finden, der früheste in der Datenbank vorhandene Zeitpunkt ist: {DisplayedLists.rangeForAnalysis.Begin.ToLongTimeString()}",
+                    "Ok."
+                );
+                Filter_Button.IsEnabled = false;
             }
         }
 
@@ -105,10 +109,12 @@ namespace LogFileToDB
             IpInput.Clear();
             StartInput.Clear();
             EndInput.Clear();
+            StatusPicker.SelectedIndex = -1;
+            MethodPicker.SelectedIndex = -1;
             supressFilterUpdate = false;
-            LogEntriesFilter emptyFilter = new LogEntriesFilter();
+            logEntries = new LogEntriesFilter();
             var emit = new EmitEvent();
-            emit.logEntries = emptyFilter;
+            emit.logEntries = logEntries;
             FilterSelected(this, emit);
         }
     }

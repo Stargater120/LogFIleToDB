@@ -172,17 +172,10 @@ namespace Core
                     query += " HAVING ";
                     query += string.Join(" AND ", filters);
                 }
+            }
 
-                if (filter.Order != null)
-                {
-                    query += " ORDER BY count ";
-                    query += GetOrder(filter.Order.Value);
-                }
-            }
-            else
-            {
-                query += " ORDER BY count ASC ";
-            }
+            query += " ORDER BY count ASC ";
+
 
             cmd.CommandText = query;
 

@@ -2,7 +2,6 @@
 using Core.Models;
 using Microsoft.Win32;
 using System;
-using System.Threading;
 using System.Windows;
 
 namespace LogFileToDB

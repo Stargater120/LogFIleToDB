@@ -20,7 +20,7 @@
 
         <!--methode filter-->
         <Label Foreground="AliceBlue" Content="Methode-" HorizontalAlignment="Left" Margin="562,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodePicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="630,0,0,0">
+        <ComboBox SelectedIndex="0" SelectionChanged="MethodePicker_SelectionChanged" x:Name="MethodPicker" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="630,0,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -40,7 +40,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button ToolTip="Filter anwenden." Click="Search" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Margin="1002,0,0,0" Background="White" Cursor="Hand" Content="Filtern">
+        <Button x:Name="Filter_Button" ToolTip="Filter anwenden." Click="Search" Width="75" HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" Margin="1002,0,0,0" Background="White" Cursor="Hand" Content="Filtern">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>

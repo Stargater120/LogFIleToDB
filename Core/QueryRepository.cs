@@ -73,7 +73,7 @@ namespace Core
             LogEntriesFilter? filter)
         {
             string query =
-                $"SELECT {columnNames[attribute]}, COUNT(*) as count FROM log_entry GROUP BY {columnNames[attribute]} ORDER BY count ASC";
+                $"SELECT {columnNames[attribute]}, COUNT(*) as count FROM log_entry GROUP BY {columnNames[attribute]}";
             return GetAttributeWithCount(query, columnNames[attribute], filter);
         }
 

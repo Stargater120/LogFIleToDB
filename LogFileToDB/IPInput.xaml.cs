@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace LogFileToDB
 {
@@ -13,7 +12,12 @@ namespace LogFileToDB
     /// </summary>
     public partial class IPInput : UserControl
     {
-        private static readonly List<Key> DigitKeys = new List<Key> { Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, Key.NumPad0, Key.NumPad1, Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9 };
+        private static readonly List<Key> DigitKeys = new List<Key>
+        {
+            Key.D0, Key.D1, Key.D2, Key.D3, Key.D4, Key.D5, Key.D6, Key.D7, Key.D8, Key.D9, Key.NumPad0, Key.NumPad1,
+            Key.NumPad2, Key.NumPad3, Key.NumPad4, Key.NumPad5, Key.NumPad6, Key.NumPad7, Key.NumPad8, Key.NumPad9
+        };
+
         private static readonly List<Key> MoveForwardKeys = new List<Key> { Key.Right };
         private static readonly List<Key> MoveBackwardKeys = new List<Key> { Key.Left };
         private static readonly List<Key> OtherAllowedKeys = new List<Key> { Key.Tab, Key.Delete };
@@ -61,13 +65,14 @@ namespace LogFileToDB
                     ipTextBox._segments[i].Text = segment;
                     i++;
                 }
+
                 ipTextBox._suppressAddressUpdate = false;
             }
+
             if (ipTextBox.CheckSegments())
             {
                 ipTextBox.SetIPAddress(ipTextBox);
             }
-
         }
 
         private bool CheckSegments()
@@ -85,15 +90,17 @@ namespace LogFileToDB
         {
             string ipAddress = "";
             int i = 0;
-            foreach(var segment in ipTextBox._segments)
+            foreach (var segment in ipTextBox._segments)
             {
                 ipAddress += segment.Text;
-                if(i != 3)
+                if (i != 3)
                 {
                     ipAddress += ".";
                 }
+
                 i++;
             }
+
             var emit = new EmitEvent();
             emit.IPAddress = ipAddress;
             EmitIP(this, emit);
@@ -170,7 +177,8 @@ namespace LogFileToDB
         {
             if (!_suppressAddressUpdate)
             {
-                Address = string.Format("{0}.{1}.{2}.{3}", FirstSegment.Text, SecondSegment.Text, ThirdSegment.Text, LastSegment.Text);
+                Address = string.Format("{0}.{1}.{2}.{3}", FirstSegment.Text, SecondSegment.Text, ThirdSegment.Text,
+                    LastSegment.Text);
             }
 
             var currentTextBox = FocusManager.GetFocusedElement(this) as TextBox;
@@ -227,7 +235,8 @@ namespace LogFileToDB
         {
             var currentTextBox = sender;
 
-            if (currentTextBox != null && currentTextBox.Text.Length > 0 && currentTextBox.CaretIndex == currentTextBox.Text.Length)
+            if (currentTextBox != null && currentTextBox.Text.Length > 0 &&
+                currentTextBox.CaretIndex == currentTextBox.Text.Length)
             {
                 MoveFocusToNextSegment(currentTextBox);
             }
