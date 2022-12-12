@@ -44,41 +44,41 @@
             <ColumnDefinition Width="10" />
 
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="5" />
 
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="5" />
 
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <TextBox x:Name="FirstSegment" Grid.Column="0" TextAlignment="Center" MaxLength="2" BorderThickness="1,1,0,1" VerticalContentAlignment="Center" 
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Tag"/>
         <TextBox Grid.Column="1" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
                  IsReadOnlyCaretVisible="False"/>
 
         <TextBox x:Name="SecondSegment" Grid.Column="2" TextAlignment="Center" MaxLength="2" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Monat"/>
         <TextBox Grid.Column="3" Text="." TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
                  IsReadOnlyCaretVisible="False"/>
 
         <TextBox x:Name="YearSegment" Grid.Column="4" TextAlignment="Center" MaxLength="4" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
-        <TextBox Grid.Column="5" Text="" TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Jahr"/>
+        <TextBox Grid.Column="5" Text="," TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
                  IsReadOnlyCaretVisible="False" />
 
         <TextBox x:Name="HoursSegment" Grid.Column="6" TextAlignment="Center" MaxLength="3" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Stunden"/>
         <TextBox Grid.Column="7" Text=":" TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
-                 IsReadOnlyCaretVisible="False" />
+                 IsReadOnlyCaretVisible="False"/>
 
         <TextBox x:Name="MinutesSegment" Grid.Column="8" TextAlignment="Center" MaxLength="3" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Minuten"/>
         <TextBox Grid.Column="9" Text=":" TextAlignment="Center" IsReadOnly="True" Focusable="False" BorderThickness="0,1,0,1" VerticalContentAlignment="Center"
                  IsReadOnlyCaretVisible="False" />
 
         <TextBox x:Name="SecondsSegment" Grid.Column="10" TextAlignment="Center" MaxLength="3" BorderThickness="0,1,1,1" VerticalContentAlignment="Center"
-                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" />
+                 TextChanged="TextBoxBase_OnTextChanged" PreviewKeyDown="UIElement_OnPreviewKeyDown" DataObject.Pasting="DataObject_OnPasting" ToolTip="Sekunden"/>
        
     </Grid>
 </UserControl>
