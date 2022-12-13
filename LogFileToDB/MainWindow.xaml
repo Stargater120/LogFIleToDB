@@ -39,7 +39,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </Window.Resources>
 
     <Grid Background="#1c2021">
@@ -80,7 +79,7 @@
                     <!-- FilterSelected="ListFilterControles_FilterSelected"-->
                     <controls:ListFilterControles Grid.Row="0" x:Name="ProtokolFilters" FilterSelected="ProtokolFilters_FilterSelected" Margin="0,0,52,0"/>
                     <!--open File Btn-->
-                    <Button Grid.Row="0" ToolTip="Logfile hochladen und Daten speichern." Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="25" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1128,0,0,0" >
+                    <Button Grid.Row="0" ToolTip="Logfile hochladen und Daten speichern." Click="AddDataThroughFile" Cursor="Hand" Background="White"  Width="25" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,10,0" >
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="5"/>
@@ -131,7 +130,7 @@
                     <!--Filter Component-->
                     <controls:ListFilterControles x:Name="IPFilters" FilterSelected="IPFilters_FilterSelected"/>
                     <!--Logs IP Table-->
-                    <DataGrid x:Name="IP_Datagrid" CanUserReorderColumns="False" CanUserAddRows="False" HeadersVisibility="Column"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
+                    <DataGrid Visibility="{Binding GridVisible}" x:Name="IP_Datagrid" CanUserReorderColumns="False" CanUserAddRows="False" HeadersVisibility="Column"  Grid.Row="1" Padding="0,3,0,1" Background="#ecf0f1" Width="auto" Height="auto" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,10,10">
                         <DataGrid.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>

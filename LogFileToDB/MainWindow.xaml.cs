@@ -18,10 +18,7 @@ namespace LogFileToDB
         {
             _repository = repository;
             _queryRepository = queryRepository;
-            //FillComboBoxes();
             InitializeComponent();
-            //InitializeLists();
-            //_queryRepository.GetTimeRangeForFilterAsync();
         }
 
         private async void FillComboBoxes()
